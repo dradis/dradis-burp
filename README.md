@@ -1,4 +1,4 @@
-# Burp Scanner plugin for the Dradis Framework
+# Burp Scanner plugin for Dradis
 
 
 Upload Burp Scanner XML export files into Dradis.
