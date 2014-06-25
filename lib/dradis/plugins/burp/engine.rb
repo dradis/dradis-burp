@@ -1,10 +1,14 @@
 module Dradis
   module Plugins
     module Burp
-      class Engine < ::Rails:Engine
-        include ::Dradis::Plugins::Base
-
+      class Engine < ::Rails::Engine
         isolate_namespace Dradis::Plugins::Burp
+
+        include ::Dradis::Plugins::Base
+        provides :upload
+
+#     NAME = "Burp Scanner output (.xml) file upload"
+    # EXPECTS = "Burp Scanner XML output. Go to the Scanner tab > right-click item > generate report"
 
 
         # Configuring the gem
