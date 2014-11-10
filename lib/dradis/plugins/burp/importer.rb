@@ -60,6 +60,7 @@ module Dradis::Plugins::Burp
         end
 
         logger.info{ "\tadding evidence for this instance to #{affected_host.label}."}
+
         evidence_text = template_service.process_template(
           template: 'evidence',
           data: xml_issue)
@@ -69,9 +70,9 @@ module Dradis::Plugins::Burp
           node: affected_host,
           content: evidence_text)
 
-        logger.info{ 'Burp Scanner results successfully imported' }
-        return true
       end
+      logger.info{ 'Burp Scanner results successfully imported' }
+      return true
     end
 
   end
