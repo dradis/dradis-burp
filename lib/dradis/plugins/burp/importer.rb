@@ -60,7 +60,6 @@ module Dradis::Plugins::Burp
         end
 
         logger.info{ "\tadding evidence for this instance to #{affected_host.label}."}
-        evidence_text = process_entry('evidence', xml_issue)
         evidence_text = template_service.process_template(
           template: 'evidence',
           data: xml_issue)
