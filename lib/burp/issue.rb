@@ -63,8 +63,12 @@ module Burp
 
       # Then we try simple children tags: name, type, ...
       tag = @xml.xpath("./#{method_name}").first
-      if tag
-        return tag.text
+      if tag && !tag.text.blank?
+        if tags_with_html_content.include?(method)
+          return cleanup_html(tag.text)
+        else
+          return tag.text
+        end
       end
 
       if (['request', 'response'].include?(method_name))
@@ -76,6 +80,36 @@ module Burp
     end
 
     private
+
+    def cleanup_html(source)
+      result = source.dup
+      result.gsub!(/&quot;/, '"')
+      result.gsub!(/&amp;/, '&')
+      result.gsub!(/&lt;/, '<')
+      result.gsub!(/&gt;/, '>')
+
+      result.gsub!(/<b>(.*?)<\/b>/, '*\1*')
+      result.gsub!(/<br\/>/, "\n")
+      result.gsub!(/<br>/, "\n")
+      result.gsub!(/<font.*?>(.*?)<\/font>/m, '\1')
+      result.gsub!(/<h2>(.*?)<\/h2>/, '*\1*')
+      result.gsub!(/<i>(.*?)<\/i>/, '\1')
+      result.gsub!(/<p>(.*?)<\/p>/, '\1')
+      result.gsub!(/<pre.*?>(.*?)<\/pre>/m){|m| "\n\nbc.. #{ $1 }\n\np.  \n" }
+
+      result.gsub!(/<ul>/, "\n")
+      result.gsub!(/<\/ul>/, "\n")
+      result.gsub!(/<li>/, "\n* ")
+      result.gsub!(/<\/li>/, "\n")
+
+      result
+    end
+
+    # Some of the values have embedded HTML content that we need to strip
+    def tags_with_html_content
+      [:background, :detail, :remediation_background, :remediation_detail]
+    end
+
     def requestresponse_child(field)
       return 'n/a' unless @xml.at('requestresponse') && @xml.at("requestresponse/#{field}")
 
