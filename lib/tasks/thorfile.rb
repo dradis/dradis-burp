@@ -1,25 +1,40 @@
-class DradisTasks < Thor
-  class Upload < Thor
-    namespace     "dradis:upload"
+class BurpTasks < Thor
+  include Core::Pro::ProjectScopedTask if defined?(::Core::Pro)
 
-    desc "burp FILE", "upload Burp scanner XML output"
-    def burp(file_path)
-      require 'config/environment'
+  namespace "dradis:plugins:burp"
 
-      logger = Logger.new(STDOUT)
-      logger.level = Logger::DEBUG
+  desc "upload FILE", "upload Burp XML results"
+  def upload(file_path)
+    require 'config/environment'
 
-      unless File.exists?(file_path)
-        $stderr.puts "** the file [#{file_path}] does not exist"
-        exit -1
-      end
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::DEBUG
 
-      BurpUpload.import(
-        :file => file_path,
-        :logger => logger)
-
-      logger.close
+    unless File.exists?(file_path)
+      $stderr.puts "** the file [#{file_path}] does not exist"
+      exit -1
     end
 
+    content_service = nil
+    template_service = nil
+    if defined?(Dradis::Pro)
+      detect_and_set_project_scope
+      content_service = Dradis::Pro::Plugins::ContentService.new(plugin: Dradis::Plugins::Burp)
+      template_service = Dradis::Pro::Plugins::TemplateService.new(plugin: Dradis::Plugins::Burp)
+    else
+      content_service = Dradis::Plugins::ContentService.new(plugin: Dradis::Plugins::Burp)
+      template_service = Dradis::Plugins::TemplateService.new(plugin: Dradis::Plugins::Burp)
+    end
+
+    importer = Dradis::Plugins::Burp::Importer.new(
+                logger: logger,
+       content_service: content_service,
+      template_service: template_service
+    )
+
+    importer.import(file: file_path)
+
+    logger.close
   end
+
 end
