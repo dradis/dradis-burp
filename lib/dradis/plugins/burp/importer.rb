@@ -20,7 +20,6 @@ module Dradis::Plugins::Burp
 
       # This will be filled in by the Processor while iterating over the issues
       hosts         = []
-      issue_types   = {}
       affected_host = nil
       issue_text    = nil
       evidence_text = nil
@@ -29,44 +28,36 @@ module Dradis::Plugins::Burp
         issue_name = xml_issue.at('name').text
         issue_type = xml_issue.at('type').text.to_i
 
-        logger.info{ "Adding #{issue_name} (#{issue_type})" }
+        logger.info{ "Adding #{ issue_name } (#{ issue_type })" }
 
         host_label = xml_issue.at('host')['ip']
         host_label = xml_issue.at('host').text if host_label.empty?
         affected_host = content_service.create_node(label: host_label, type: :host)
-        logger.info{ "\taffects: #{host_label}" }
+        logger.info{ "\taffects: #{ host_label }" }
 
         if !hosts.include?(affected_host.label)
+          hosts << affected_host.label
           url = xml_issue.at('host').text
-          host_description = "\#[HostInfo]\#\n#{url}\n\n"
+          host_description = "\#[HostInfo]\#\n#{ url }\n\n"
           content_service.create_note(text: host_description, node: affected_host)
         end
 
-        # The first time we see a new issue type (i.e. Burp plugin ID), we create
-        # a new Issue object for the general info (e.g. background, desc, recomm)
-        # and an Evidence object for the instance especific bits.
-        if !issue_types.key?( issue_type )
-          logger.info{ "\tissue not found in the library yet. Adding..." }
+        issue_text = template_service.process_template(
+          template: 'issue',
+          data: xml_issue)
 
-          issue_text = template_service.process_template(
-            template: 'issue',
-            data: xml_issue)
+        issue = content_service.create_issue(
+          text: issue_text,
+          id: issue_type)
 
-          issue_types[ issue_type ] = content_service.create_issue(
-            text: issue_text,
-            id: issue_type)
-
-          logger.info{ "\t\tdone."}
-        end
-
-        logger.info{ "\tadding evidence for this instance to #{affected_host.label}."}
+        logger.info{ "\tadding evidence for this instance to #{ affected_host.label }."}
 
         evidence_text = template_service.process_template(
           template: 'evidence',
           data: xml_issue)
 
         content_service.create_evidence(
-          issue: issue_types[issue_type],
+          issue: issue,
           node: affected_host,
           content: evidence_text)
 
