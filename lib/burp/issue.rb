@@ -29,6 +29,13 @@ module Burp
       ]
     end
 
+    # This allows external callers (and specs) to check for implemented
+    # properties
+    def respond_to?(method, include_private=false)
+      return true if supported_tags.include?(method.to_sym)
+      super
+    end
+
     # This method is invoked by Ruby when a method that is not defined in this
     # instance is called.
     #
