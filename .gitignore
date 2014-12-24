@@ -1,0 +1,7 @@
+# Bundler config
+Gemfile.lock
+/.bundle/
+/vendor/bundle/
+
+# Gem artifacts
+/pkg/

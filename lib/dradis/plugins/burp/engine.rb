@@ -5,11 +5,8 @@ module Dradis
         isolate_namespace Dradis::Plugins::Burp
 
         include ::Dradis::Plugins::Base
+        description 'Processes Burp Scanner XML output'
         provides :upload
-
-#     NAME = "Burp Scanner output (.xml) file upload"
-    # EXPECTS = "Burp Scanner XML output. Go to the Scanner tab > right-click item > generate report"
-
 
         # Configuring the gem
         # class Configuration < Core::Configurator
@@ -22,3 +19,4 @@ module Dradis
     end
   end
 end
+

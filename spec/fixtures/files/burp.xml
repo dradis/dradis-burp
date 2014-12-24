@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE issues [
+<!ELEMENT issues (issue*)>
+<!ATTLIST issues burpVersion CDATA "">
+<!ATTLIST issues exportTime CDATA "">
+<!ELEMENT issue (serialNumber, type, name, host, path, location, severity, confidence, issueBackground?, remediationBackground?, issueDetail?, remediationDetail?, requestresponse*)>
+<!ELEMENT serialNumber (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT host (#PCDATA)>
+<!ATTLIST host ip CDATA "">
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT severity (#PCDATA)>
+<!ELEMENT confidence (#PCDATA)>
+<!ELEMENT issueBackground (#PCDATA)>
+<!ELEMENT remediationBackground (#PCDATA)>
+<!ELEMENT issueDetail (#PCDATA)>
+<!ELEMENT remediationDetail (#PCDATA)>
+<!ELEMENT requestresponse (request?, response?, responseRedirected?)>
+<!ELEMENT request (#PCDATA)>
+<!ATTLIST request base64 (true|false) "false">
+<!ELEMENT response (#PCDATA)>
+<!ATTLIST response base64 (true|false) "false">
+<!ELEMENT responseRedirected (#PCDATA)>
+]>
+<issues burpVersion="1.5.14" exportTime="Wed Nov 10 17:26:55 EDT 2014">
+  <issue>
+    <serialNumber>1833460934674078320</serialNumber>
+    <type>8781630</type>
+    <name>Issue 1</name>
+    <host ip="10.0.0.1">http://www.test.com</host>
+    <path><![CDATA[/Common/login.aspx]]></path>
+    <location><![CDATA[/Common/login.aspx]]></location>
+    <severity>Information</severity>
+    <confidence>Firm</confidence>
+    <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
+    <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
+    <issueDetail><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quisquam aut necessitatibus ex possimus suscipit ipsam ipsa repellendus quo nostrum! Dolores quibusdam modi impedit nihil necessitatibus dicta vitae dolorem sit!]]></issueDetail>
+    <requestresponse>
+      <request base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFByb3ZpZGVudCBpcHN1bSBjb25zZWN0ZXR1ciBxdWlkZW0gb2JjYWVjYXRpIG5hdHVzLCByZW0gYXQgcXVhcyBzaW50IHRlbXBvcmUgYXV0ZW0gdm9sdXB0YXRpYnVzLCB2ZW5pYW0gZnVnaWF0IGN1bXF1ZSBsYWJvcmlvc2FtIG5lY2Vzc2l0YXRpYnVzIG9tbmlzIHJlaWNpZW5kaXMgdW5kZSBtYWduYW0u]]></request>
+      <response base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFNhcGllbnRlIGZ1Z2lhdCBlYXJ1bSwgYW5pbWkgdmVybyBxdWlidXNkYW0gc2VkLCBkb2xvcnVtIGRpc3RpbmN0aW8gYWxpcXVhbSwgcmVpY2llbmRpcyBjb3Jwb3JpcyBuaWhpbCBleGNlcHR1cmkgY29uc2VjdGV0dXIgZGVsZW5pdGkgbW9sZXN0aWFzIGhhcnVtIGxhYm9yaW9zYW0gc3VudCBub3N0cnVtIG9kaW8u]]></response>
+      <responseRedirected>false</responseRedirected>
+    </requestresponse>
+  </issue>
+  <issue>
+    <serialNumber>1833460934674078321</serialNumber>
+    <type>8781631</type>
+    <name>Issue 2</name>
+    <host ip="10.0.0.1">http://www.test.com</host>
+    <path><![CDATA[/Common/login.aspx]]></path>
+    <location><![CDATA[/Common/login.aspx]]></location>
+    <severity>Information</severity>
+    <confidence>Firm</confidence>
+    <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
+    <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
+    <issueDetail><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quisquam aut necessitatibus ex possimus suscipit ipsam ipsa repellendus quo nostrum! Dolores quibusdam modi impedit nihil necessitatibus dicta vitae dolorem sit!]]></issueDetail>
+    <requestresponse>
+      <request base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFByb3ZpZGVudCBpcHN1bSBjb25zZWN0ZXR1ciBxdWlkZW0gb2JjYWVjYXRpIG5hdHVzLCByZW0gYXQgcXVhcyBzaW50IHRlbXBvcmUgYXV0ZW0gdm9sdXB0YXRpYnVzLCB2ZW5pYW0gZnVnaWF0IGN1bXF1ZSBsYWJvcmlvc2FtIG5lY2Vzc2l0YXRpYnVzIG9tbmlzIHJlaWNpZW5kaXMgdW5kZSBtYWduYW0u]]></request>
+      <response base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFNhcGllbnRlIGZ1Z2lhdCBlYXJ1bSwgYW5pbWkgdmVybyBxdWlidXNkYW0gc2VkLCBkb2xvcnVtIGRpc3RpbmN0aW8gYWxpcXVhbSwgcmVpY2llbmRpcyBjb3Jwb3JpcyBuaWhpbCBleGNlcHR1cmkgY29uc2VjdGV0dXIgZGVsZW5pdGkgbW9sZXN0aWFzIGhhcnVtIGxhYm9yaW9zYW0gc3VudCBub3N0cnVtIG9kaW8u]]></response>
+      <responseRedirected>false</responseRedirected>
+    </requestresponse>
+  </issue>
+  <issue>
+    <serialNumber>1833460934674078322</serialNumber>
+    <type>8781632</type>
+    <name>Issue 3</name>
+    <host ip="10.0.0.1">http://www.test.com</host>
+    <path><![CDATA[/Common/login.aspx]]></path>
+    <location><![CDATA[/Common/login.aspx]]></location>
+    <severity>Information</severity>
+    <confidence>Firm</confidence>
+    <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
+    <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
+    <issueDetail><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quisquam aut necessitatibus ex possimus suscipit ipsam ipsa repellendus quo nostrum! Dolores quibusdam modi impedit nihil necessitatibus dicta vitae dolorem sit!]]></issueDetail>
+    <requestresponse>
+      <request base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFByb3ZpZGVudCBpcHN1bSBjb25zZWN0ZXR1ciBxdWlkZW0gb2JjYWVjYXRpIG5hdHVzLCByZW0gYXQgcXVhcyBzaW50IHRlbXBvcmUgYXV0ZW0gdm9sdXB0YXRpYnVzLCB2ZW5pYW0gZnVnaWF0IGN1bXF1ZSBsYWJvcmlvc2FtIG5lY2Vzc2l0YXRpYnVzIG9tbmlzIHJlaWNpZW5kaXMgdW5kZSBtYWduYW0u]]></request>
+      <response base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFNhcGllbnRlIGZ1Z2lhdCBlYXJ1bSwgYW5pbWkgdmVybyBxdWlidXNkYW0gc2VkLCBkb2xvcnVtIGRpc3RpbmN0aW8gYWxpcXVhbSwgcmVpY2llbmRpcyBjb3Jwb3JpcyBuaWhpbCBleGNlcHR1cmkgY29uc2VjdGV0dXIgZGVsZW5pdGkgbW9sZXN0aWFzIGhhcnVtIGxhYm9yaW9zYW0gc3VudCBub3N0cnVtIG9kaW8u]]></response>
+      <responseRedirected>false</responseRedirected>
+    </requestresponse>
+  </issue>
+  <issue>
+    <serialNumber>1833460934674078323</serialNumber>
+    <type>8781633</type>
+    <name>Issue 4</name>
+    <host ip="10.0.0.1">http://www.test.com</host>
+    <path><![CDATA[/Common/login.aspx]]></path>
+    <location><![CDATA[/Common/login.aspx]]></location>
+    <severity>Information</severity>
+    <confidence>Firm</confidence>
+    <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
+    <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
+    <issueDetail><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quisquam aut necessitatibus ex possimus suscipit ipsam ipsa repellendus quo nostrum! Dolores quibusdam modi impedit nihil necessitatibus dicta vitae dolorem sit!]]></issueDetail>
+    <requestresponse>
+      <request base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFByb3ZpZGVudCBpcHN1bSBjb25zZWN0ZXR1ciBxdWlkZW0gb2JjYWVjYXRpIG5hdHVzLCByZW0gYXQgcXVhcyBzaW50IHRlbXBvcmUgYXV0ZW0gdm9sdXB0YXRpYnVzLCB2ZW5pYW0gZnVnaWF0IGN1bXF1ZSBsYWJvcmlvc2FtIG5lY2Vzc2l0YXRpYnVzIG9tbmlzIHJlaWNpZW5kaXMgdW5kZSBtYWduYW0u]]></request>
+      <response base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFNhcGllbnRlIGZ1Z2lhdCBlYXJ1bSwgYW5pbWkgdmVybyBxdWlidXNkYW0gc2VkLCBkb2xvcnVtIGRpc3RpbmN0aW8gYWxpcXVhbSwgcmVpY2llbmRpcyBjb3Jwb3JpcyBuaWhpbCBleGNlcHR1cmkgY29uc2VjdGV0dXIgZGVsZW5pdGkgbW9sZXN0aWFzIGhhcnVtIGxhYm9yaW9zYW0gc3VudCBub3N0cnVtIG9kaW8u]]></response>
+      <responseRedirected>false</responseRedirected>
+    </requestresponse>
+  </issue>
+</issues>
