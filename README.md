@@ -1,6 +1,7 @@
 # Burp Scanner plugin for Dradis
 
-[![Build Status](https://secure.travis-ci.org/dradis/dradis-burp.png?branch=master)](http://travis-ci.org/dradis/dradis-burp)
+[![Build Status](https://secure.travis-ci.org/dradis/dradis-burp.png?branch=master)](http://travis-ci.org/dradis/dradis-burp) [![Code Climate](https://codeclimate.com/github/dradis/dradis-burp.png)](https://codeclimate.com/github/dradis/dradis-burp.png)
+
 
 Upload Burp Scanner XML export files into Dradis.
 
