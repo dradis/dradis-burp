@@ -1,6 +1,6 @@
 module Dradis
   module Plugins
-    module Qualys
+    module Burp
     end
   end
 end
