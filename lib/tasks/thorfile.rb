@@ -17,13 +17,13 @@ class BurpTasks < Thor
 
     content_service = nil
     template_service = nil
+
+    template_service = Dradis::Plugins::TemplateService.new(plugin: Dradis::Plugins::Burp)
     if defined?(Dradis::Pro)
       detect_and_set_project_scope
       content_service = Dradis::Pro::Plugins::ContentService.new(plugin: Dradis::Plugins::Burp)
-      template_service = Dradis::Pro::Plugins::TemplateService.new(plugin: Dradis::Plugins::Burp)
     else
       content_service = Dradis::Plugins::ContentService.new(plugin: Dradis::Plugins::Burp)
-      template_service = Dradis::Plugins::TemplateService.new(plugin: Dradis::Plugins::Burp)
     end
 
     importer = Dradis::Plugins::Burp::Importer.new(
