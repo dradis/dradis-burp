@@ -7,6 +7,15 @@ module Dradis::Plugins::Burp
     def import(params = {})
       file_content = File.read( params[:file] )
 
+      if file_content =~ /base64="false"/
+        error =  "Burp input contains HTTP request / response data that hasn't been Base64-encoded.\n"
+        error << "Please re-export your scanner results making sure the Base-64 encode option is selected."
+
+        logger.fatal{ error }
+        content_service.create_note text: error
+        return false
+      end
+
       logger.info{ 'Parsing Burp Scanner output file...' }
       doc = Nokogiri::XML( file_content )
       logger.info{'Done.'}

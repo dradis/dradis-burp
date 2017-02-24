@@ -124,7 +124,13 @@ module Burp
       result = "[unprocessable #{field}]"
 
       if xml_node['base64'] == 'true'
-        result = Base64::decode64(xml_node.text)
+        result = Base64::strict_decode64(xml_node.text)
+
+        # don't pass binary data to the DB.
+        if result =~ /\0/
+          header, _ = result.split("\r\n\r\n")
+          result = header << "\r\n\r\n" << '[Binary Data Not Displayed]'
+        end
       else
         result = xml_node.text
       end
@@ -137,7 +143,7 @@ module Burp
       #
       # TODO: maybe add a reference to this node's XPATH so the user can go
       # back to the burp scanner file and look up the original request/response
-      result.truncate(50000, :omission => '... (truncated)')
+      result.truncate(50000, omission: '... (truncated)')
     end
   end
 end
