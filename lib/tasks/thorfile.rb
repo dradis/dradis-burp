@@ -14,7 +14,7 @@ class BurpTasks < Thor
 
     detect_and_set_project_scope
 
-    importer = Dradis::Plugins::Burp::Importer.new(logger: logger)
+    importer = Dradis::Plugins::Burp::Importer.new(task_options)
     importer.import(file: file_path)
   end
 
