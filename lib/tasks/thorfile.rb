@@ -7,9 +7,6 @@ class BurpTasks < Thor
   def upload(file_path)
     require 'config/environment'
 
-    logger = Logger.new(STDOUT)
-    logger.level = Logger::DEBUG
-
     unless File.exists?(file_path)
       $stderr.puts "** the file [#{file_path}] does not exist"
       exit -1
@@ -17,10 +14,8 @@ class BurpTasks < Thor
 
     detect_and_set_project_scope
 
-    importer = Dradis::Plugins::Burp::Importer.new(logger: logger)
+    importer = Dradis::Plugins::Burp::Importer.new(task_options)
     importer.import(file: file_path)
-
-    logger.close
   end
 
 end
