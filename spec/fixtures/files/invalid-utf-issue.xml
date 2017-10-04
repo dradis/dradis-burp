@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<issues>
+  <issue>
+    <serialNumber>1833460934674078320</serialNumber>
+    <type>8781630</type>
+    <name>Issue 1</name>
+    <host ip="10.0.0.1">http://www.test.com</host>
+    <path><![CDATA[/Common/login.aspx\xc3\x28\255]]></path>
+    <location><![CDATA[/Common/login.aspx\xC3(]]></location>
+    <severity>Information</severity>
+    <confidence>Firm</confidence>
+    <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
+    <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
+    <issueDetail><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quisquam aut necessitatibus ex possimus suscipit ipsam ipsa repellendus quo nostrum! Dolores quibusdam modi impedit nihil necessitatibus dicta vitae dolorem sit!]]></issueDetail>
+    <requestresponse>
+      <request base64="true"><![CDATA[liBUcnVlIHdvcmtlcpI=]]></request>
+      <response base64="true"><![CDATA[TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2ljaW5nIGVsaXQuIFNhcGllbnRlIGZ1Z2lhdCBlYXJ1bSwgYW5pbWkgdmVybyBxdWlidXNkYW0gc2VkLCBkb2xvcnVtIGRpc3RpbmN0aW8gYWxpcXVhbSwgcmVpY2llbmRpcyBjb3Jwb3JpcyBuaWhpbCBleGNlcHR1cmkgY29uc2VjdGV0dXIgZGVsZW5pdGkgbW9sZXN0aWFzIGhhcnVtIGxhYm9yaW9zYW0gc3VudCBub3N0cnVtIG9kaW8u]]></response>
+      <responseRedirected>false</responseRedirected>
+    </requestresponse>
+  </issue>
+</issues>

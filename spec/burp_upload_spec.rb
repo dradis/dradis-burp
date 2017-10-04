@@ -4,7 +4,13 @@ require 'ostruct'
 describe 'Burp upload plugin' do
 
   describe Burp::Issue do
-    pending "create some unit tests for the Burp::Issue wrapper class"
+    it "handles invalid utf-8 bytes" do
+      doc = Nokogiri::XML(File.read('spec/fixtures/files/invalid-utf-issue.xml'))
+      xml_issue = doc.xpath('issues/issue').first
+      issue = Burp::Issue.new(xml_issue)
+
+      expect{ issue.request.encode('utf-8') }.to_not raise_error
+    end
   end
 
   describe "Importer" do
@@ -17,12 +23,13 @@ describe 'Burp upload plugin' do
       # Init services
       plugin = Dradis::Plugins::Burp
 
-      @content_service = Dradis::Plugins::ContentService.new(plugin: plugin)
-      template_service = Dradis::Plugins::TemplateService.new(plugin: plugin)
+      @content_service = Dradis::Plugins::ContentService::Base.new(
+        logger: Logger.new(STDOUT),
+        plugin: plugin
+      )
 
       @importer = plugin::Importer.new(
         content_service: @content_service,
-        template_service: template_service
       )
 
       # Stub dradis-plugins methods
