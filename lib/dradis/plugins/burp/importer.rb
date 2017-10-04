@@ -63,12 +63,14 @@ module Dradis::Plugins::Burp
 
         evidence_text = template_service.process_template(
           template: 'evidence',
-          data: xml_issue)
+          data: xml_issue
+        )
 
         content_service.create_evidence(
           issue: issue,
           node: affected_host,
-          content: evidence_text)
+          content: evidence_text
+        )
 
       end
       logger.info{ 'Burp Scanner results successfully imported' }

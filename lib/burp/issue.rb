@@ -144,6 +144,9 @@ module Burp
       # TODO: maybe add a reference to this node's XPATH so the user can go
       # back to the burp scanner file and look up the original request/response
       result.truncate(50000, omission: '... (truncated)')
+
+      # Encode the string to utf-8 to catch invalid bytes.
+      result.encode('utf-8', invalid: :replace, undef: :replace)
     end
   end
 end
