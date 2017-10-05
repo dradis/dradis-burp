@@ -8,6 +8,8 @@ module Burp
   # Instead of providing separate methods for each supported property we rely
   # on Ruby's #method_missing to do most of the work.
   class Issue
+    INVALID_UTF_REPLACE = "<?>"
+
     # Accepts an XML node from Nokogiri::XML.
     def initialize(xml_node)
       @xml = xml_node
@@ -146,7 +148,7 @@ module Burp
       result.truncate(50000, omission: '... (truncated)')
 
       # Encode the string to utf-8 to catch invalid bytes.
-      result.encode('utf-8', invalid: :replace, undef: :replace)
+      result.encode('utf-8', invalid: :replace, undef: :replace, replace: INVALID_UTF_REPLACE)
     end
   end
 end

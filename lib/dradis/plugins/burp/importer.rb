@@ -55,6 +55,13 @@ module Dradis::Plugins::Burp
           template: 'issue',
           data: xml_issue)
 
+        if issue_text.include?(::Burp::Issue::INVALID_UTF_REPLACE)
+          logger.info %{
+            "\tdetected invalid UTF-8 bytes in your issue. " \
+            "Replacing them with '#{::Burp::Issue::INVALID_UTF_REPLACE}'."
+          }
+        end
+
         issue = content_service.create_issue(
           text: issue_text,
           id: issue_type)
@@ -65,6 +72,13 @@ module Dradis::Plugins::Burp
           template: 'evidence',
           data: xml_issue
         )
+
+        if evidence_text.include?(::Burp::Issue::INVALID_UTF_REPLACE)
+          logger.info {
+            "\tdetected invalid UTF-8 bytes in your evidence. " \
+            "Replacing them with '#{::Burp::Issue::INVALID_UTF_REPLACE}'."
+          }
+        end
 
         content_service.create_evidence(
           issue: issue,
