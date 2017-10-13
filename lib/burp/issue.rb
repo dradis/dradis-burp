@@ -22,7 +22,7 @@ module Burp
         # simple tags
         :serial_number, :type, :name, :host, :path, :location, :severity,
         :confidence, :background, :remediation_background, :detail,
-        :remediation_detail,
+        :remediation_detail, :references,
 
         # nested tags
         :request, :response
@@ -102,19 +102,22 @@ module Burp
       result.gsub!(/<h2>(.*?)<\/h2>/, '*\1*')
       result.gsub!(/<i>(.*?)<\/i>/, '\1')
       result.gsub!(/<p>(.*?)<\/p>/, '\1')
+      result.gsub!(/<p>/, '')
+      result.gsub!(/<\/p>/, '')
       result.gsub!(/<pre.*?>(.*?)<\/pre>/m){|m| "\n\nbc.. #{ $1 }\n\np.  \n" }
 
       result.gsub!(/<ul>/, "\n")
       result.gsub!(/<\/ul>/, "\n")
       result.gsub!(/<li>/, "\n* ")
       result.gsub!(/<\/li>/, "\n")
-
+      result.gsub!(/<a href=\"(.*?)\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      
       result
     end
 
     # Some of the values have embedded HTML content that we need to strip
     def tags_with_html_content
-      [:background, :detail, :remediation_background, :remediation_detail]
+      [:background, :detail, :remediation_background, :remediation_detail, :references]
     end
 
     def requestresponse_child(field)

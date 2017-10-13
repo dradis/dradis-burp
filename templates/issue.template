@@ -16,3 +16,7 @@
 
 #[RemediationDetails]#
 %issue.remediation_detail%
+
+
+#[References]#
+%issue.references%
