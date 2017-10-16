@@ -1,4 +1,7 @@
 module Burp
+  # We use this string to replace invalid UTF-8 bytes with.
+  INVALID_UTF_REPLACE = '<?>'
+
   # This class represents each of the /issues/issue elements in the Burp
   # Scanner XML document.
   #
@@ -8,6 +11,7 @@ module Burp
   # Instead of providing separate methods for each supported property we rely
   # on Ruby's #method_missing to do most of the work.
   class Issue
+
     # Accepts an XML node from Nokogiri::XML.
     def initialize(xml_node)
       @xml = xml_node
@@ -144,6 +148,9 @@ module Burp
       # TODO: maybe add a reference to this node's XPATH so the user can go
       # back to the burp scanner file and look up the original request/response
       result.truncate(50000, omission: '... (truncated)')
+
+      # Encode the string to UTF-8 to catch invalid bytes.
+      result.encode('utf-8', invalid: :replace, undef: :replace, replace: ::Burp::INVALID_UTF_REPLACE)
     end
   end
 end

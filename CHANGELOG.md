@@ -1,3 +1,7 @@
+## Dradis Framework 3.8.1 (XX, 2017) ##
+
+*   Encode content with UTF-8 to avoid incompatible db errors.
+
 ## Dradis Framework 3.8 (September, 2017) ##
 
 *   No changes.
