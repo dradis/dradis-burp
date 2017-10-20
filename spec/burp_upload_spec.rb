@@ -1,12 +1,23 @@
 require 'spec_helper'
 require 'ostruct'
 
-module Dradis::Plugins
-  describe 'Burp upload plugin' do
+describe 'Burp upload plugin' do
+
+  describe Burp::Issue do
+    it "handles invalid utf-8 bytes" do
+      doc = Nokogiri::XML(File.read('spec/fixtures/files/invalid-utf-issue.xml'))
+      xml_issue = doc.xpath('issues/issue').first
+      issue = Burp::Issue.new(xml_issue)
+
+      expect{ issue.request.encode('utf-8') }.to_not raise_error
+    end
+  end
+
+  describe "Importer" do
     before(:each) do
       # Stub template service
       templates_dir = File.expand_path('../../templates', __FILE__)
-      expect_any_instance_of(TemplateService)
+      expect_any_instance_of(Dradis::Plugins::TemplateService)
       .to receive(:default_templates_dir).and_return(templates_dir)
 
       # Init services
