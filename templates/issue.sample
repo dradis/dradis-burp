@@ -1,12 +1,23 @@
 <issue>
-  <serialNumber>5236964506139299840</serialNumber>
-  <type>6291712</type>
-  <name>Directory listing</name>
-  <host ip="10.0.0.1">http://wiki.local</host>
-  <path><![CDATA[/crmmanager/]]></path>
-  <location><![CDATA[/crmmanager/]]></location>
-  <severity>Information</severity>
-  <confidence>Firm</confidence>
-  <issueBackground><![CDATA[Directory listings do not necessarily constitute a security vulnerability. Any sensitive resources within your web root should be properly access-controlled in any case, and should not be accessible by an unauthorized party who happens to know the URL. Nevertheless, directory listings can aid an attacker by enabling them to quickly identify the resources at a given path, and proceed directly to analyzing and attacking them.]]></issueBackground>
-  <remediationBackground><![CDATA[There is not usually any good reason to provide directory listings, and disabling them may place additional hurdles in the path of an attacker. This can normally be achieved in two ways:<ul><li>Configure your web server to prevent directory listings for all paths beneath the web root; </li><li>Place into each directory a default file (such as index.htm) which the web server will display instead of returning a directory listing.</li></ul>]]></remediationBackground>
+  <serialNumber>5863488220648493056</serialNumber>
+  <type>16777984</type>
+  <name><![CDATA[Strict transport security not enforced]]></name>
+  <host ip="192.168.1.1">https://this.is.a.url</host>
+  <path><![CDATA[/]]></path>
+  <location><![CDATA[/]]></location>
+  <severity>Low</severity>
+  <confidence>Certain</confidence>
+  <issueBackground><![CDATA[<p> The application fails to prevent users from connecting  to it over unencrypted connections.  An attacker able to modify a legitimate user's network traffic could bypass the application's use of SSL/TLS encryption, and use the application as a platform for attacks against its users. This attack is performed by rewriting HTTPS links as HTTP, so that if a targeted user follows a link to the site from an HTTP page, their browser never attempts to use an encrypted connection. The sslstrip tool  automates this process. </p>
+<p>
+To exploit this vulnerability, an attacker must be suitably positioned to intercept and modify the victim's network traffic.This scenario typically occurs when a client communicates with the server over an insecure connection such as public Wi-Fi, or a corporate or home network that is shared with a compromised computer. Common defenses such as switched networks are not sufficient to prevent this. An attacker situated in the user's ISP or the application's hosting infrastructure could also perform this attack. Note that an advanced adversary could potentially target any connection made over the Internet's core infrastructure. </p>]]></issueBackground>
+  <remediationBackground><![CDATA[<p>The application should instruct web browsers to only access the application using HTTPS. To do this, enable HTTP Strict Transport Security (HSTS) by adding a response header with the name 'Strict-Transport-Security' and the value 'max-age=expireTime', where expireTime is the time in seconds that browsers should remember that the site should only be accessed using HTTPS. Consider adding the 'includeSubDomains' flag if appropriate.</p>
+<p>Note that because HSTS is a &quot;trust on first use&quot; (TOFU) protocol, a user who has never accessed the application will never have seen the HSTS header, and will therefore still be vulnerable to SSL stripping attacks. To mitigate this risk, you can optionally add the 'preload' flag to the HSTS header, and submit the domain for review by browser vendors.</p>]]></remediationBackground>
+  <references><![CDATA[<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">HTTP Strict Transport Security</a></li>
+<li><a href="http://www.thoughtcrime.org/software/sslstrip/">sslstrip</a></li>
+<li><a href="https://hstspreload.appspot.com/">HSTS Preload Form</a></li>
+</ul>]]></references>
+  <vulnerabilityClassifications><![CDATA[<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/523.html">CWE-523: Unprotected Transport of Credentials</a></li>
+</ul>]]></vulnerabilityClassifications>
 </issue>
