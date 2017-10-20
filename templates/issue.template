@@ -20,3 +20,7 @@
 
 #[References]#
 %issue.references%
+
+
+#[Classifications]#
+%issue.vulnerability_classifications%

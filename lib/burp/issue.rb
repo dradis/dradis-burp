@@ -22,7 +22,7 @@ module Burp
         # simple tags
         :serial_number, :type, :name, :host, :path, :location, :severity,
         :confidence, :background, :remediation_background, :detail,
-        :remediation_detail, :references,
+        :remediation_detail, :references, :vulnerability_classifications,
 
         # nested tags
         :request, :response
@@ -60,6 +60,7 @@ module Burp
         :detail => 'issueDetail',
         :remediation_background => 'remediationBackground',
         :remediation_detail => 'remediationDetail',
+        :vulnerability_classifications => 'vulnerabilityClassifications',
         :serial_number => 'serialNumber'
       }
 
@@ -117,7 +118,7 @@ module Burp
 
     # Some of the values have embedded HTML content that we need to strip
     def tags_with_html_content
-      [:background, :detail, :remediation_background, :remediation_detail, :references]
+      [:background, :detail, :remediation_background, :remediation_detail, :references, :vulnerability_classifications]
     end
 
     def requestresponse_child(field)
