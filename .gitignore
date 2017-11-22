@@ -6,3 +6,5 @@ Gemfile.lock
 # Gem artifacts
 /pkg/
 /spec/internal/
+
+.DS_Store

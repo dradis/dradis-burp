@@ -28,8 +28,8 @@ describe 'Burp upload plugin' do
         plugin: plugin
       )
 
-      @importer = Dradis::Plugins::Burp::Importer.new(
-        content_service: @content_service
+      @importer = plugin::Importer.new(
+        content_service: @content_service,
       )
 
       # Stub dradis-plugins methods
