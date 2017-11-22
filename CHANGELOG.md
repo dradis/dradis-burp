@@ -1,3 +1,11 @@
+## Dradis Framework 3.9 (December, 2017) ##
+
+*   Adds `references` and `vulnerability_classifications` as available fields
+
+*   Adds `hostname` as a Node property
+
+*   Fixes formatting errors including `<p>`, `<a href="">`, and `<table>` tags
+
 ## Dradis Framework 3.8 (September, 2017) ##
 
 *   No changes.
