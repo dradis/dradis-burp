@@ -8,8 +8,8 @@ module Dradis
 
       module VERSION
         MAJOR = 3
-        MINOR = 8
-        TINY = 1
+        MINOR = 9
+        TINY = 0
         PRE = nil
 
         STRING = [MAJOR, MINOR, TINY, PRE].compact.join(".")
