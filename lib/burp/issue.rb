@@ -26,7 +26,7 @@ module Burp
         # simple tags
         :serial_number, :type, :name, :host, :path, :location, :severity,
         :confidence, :background, :remediation_background, :detail,
-        :remediation_detail,
+        :remediation_detail, :references, :vulnerability_classifications,
 
         # nested tags
         :request, :response
@@ -64,6 +64,7 @@ module Burp
         :detail => 'issueDetail',
         :remediation_background => 'remediationBackground',
         :remediation_detail => 'remediationDetail',
+        :vulnerability_classifications => 'vulnerabilityClassifications',
         :serial_number => 'serialNumber'
       }
 
@@ -98,27 +99,30 @@ module Burp
       result.gsub!(/&amp;/, '&')
       result.gsub!(/&lt;/, '<')
       result.gsub!(/&gt;/, '>')
+      result.gsub!(/&nbsp;/, ' ')
 
       result.gsub!(/<b>(.*?)<\/b>/, '*\1*')
-      result.gsub!(/<br\/>/, "\n")
-      result.gsub!(/<br>/, "\n")
+      result.gsub!(/<br>|<\/br>/){"\n"}
       result.gsub!(/<font.*?>(.*?)<\/font>/m, '\1')
-      result.gsub!(/<h2>(.*?)<\/h2>/, '*\1*')
+      result.gsub!(/<h\d?>(.*?)<\/h\d?>/, '*\1*')
       result.gsub!(/<i>(.*?)<\/i>/, '\1')
-      result.gsub!(/<p>(.*?)<\/p>/, '\1')
+      result.gsub!(/<p>|<\/p>/){"\n"}
       result.gsub!(/<pre.*?>(.*?)<\/pre>/m){|m| "\n\nbc.. #{ $1 }\n\np.  \n" }
 
-      result.gsub!(/<ul>/, "\n")
-      result.gsub!(/<\/ul>/, "\n")
-      result.gsub!(/<li>/, "\n* ")
-      result.gsub!(/<\/li>/, "\n")
+      result.gsub!(/<ul>(.*?)<\/ul>/m){|m| "#{ $1 }\n"}
+      result.gsub!(/<li>(.*?)<\/li>/m){|m| "\n* #{ $1 }"}
+      result.gsub!(/<a href=\"(.*?)\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+
+      result.gsub!(/<table>(.*?)<\/table>/m){|m| "\n\n#{ $1 }\n\n" }
+      result.gsub!(/<tr>(.*?)<\/tr>/m){|m| "|#{ $1 }\n" }
+      result.gsub!(/<td>(.*?)<\/td>/, '\1|')
 
       result
     end
 
     # Some of the values have embedded HTML content that we need to strip
     def tags_with_html_content
-      [:background, :detail, :remediation_background, :remediation_detail]
+      [:background, :detail, :remediation_background, :remediation_detail, :references, :vulnerability_classifications]
     end
 
     def requestresponse_child(field)

@@ -3,3 +3,5 @@ issue.background
 issue.remediation_background
 issue.detail
 issue.remediation_detail
+issue.references
+issue.vulnerability_classifications

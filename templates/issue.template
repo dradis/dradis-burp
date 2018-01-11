@@ -16,3 +16,11 @@
 
 #[RemediationDetails]#
 %issue.remediation_detail%
+
+
+#[References]#
+%issue.references%
+
+
+#[Classifications]#
+%issue.vulnerability_classifications%

@@ -37,10 +37,9 @@ describe 'Burp upload plugin' do
       # They return their argument hashes as objects mimicking
       # Nodes, Issues, etc
       allow(@content_service).to receive(:create_node) do |args|
-        OpenStruct.new(args)
-      end
-      allow(@content_service).to receive(:create_note) do |args|
-        OpenStruct.new(args)
+        obj = OpenStruct.new(args)
+        obj.define_singleton_method(:set_property) { |_, __| }
+        obj
       end
       allow(@content_service).to receive(:create_issue) do |args|
         OpenStruct.new(args)
@@ -50,20 +49,15 @@ describe 'Burp upload plugin' do
       end
     end
 
-    it "creates nodes, issues, notes and an evidences as needed" do
+    it "creates nodes, issues, and evidence as needed" do
 
-      # Host node and basic host info note
+      # Host node
       #
       # create_node should be called once for each issue in the xml,
       # but ContentService knows it's already created and NOOPs
       expect(@content_service).to receive(:create_node)
       .with(hash_including label: '10.0.0.1')
       .exactly(4).times
-      # create_note should be calld just once
-      expect(@content_service).to receive(:create_note) do |args|
-        expect(args[:text]).to include("#[HostInfo]#\nhttp://www.test.com")
-        OpenStruct.new(args)
-      end.once
 
       # create_issue should be called once for each issue in the xml
       expect(@content_service).to receive(:create_issue) do |args|

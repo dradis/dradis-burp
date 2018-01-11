@@ -47,8 +47,8 @@ module Dradis::Plugins::Burp
         if !hosts.include?(affected_host.label)
           hosts << affected_host.label
           url = xml_issue.at('host').text
-          host_description = "\#[HostInfo]\#\n#{ url }\n\n"
-          content_service.create_note(text: host_description, node: affected_host)
+          affected_host.set_property(:hostname, url)
+          affected_host.save
         end
 
         issue_text = template_service.process_template(
