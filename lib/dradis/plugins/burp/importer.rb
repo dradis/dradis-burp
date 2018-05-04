@@ -104,7 +104,7 @@ module Dradis::Plugins::Burp
       ext_name = xml_issue.at('name').text
       ext_name = ext_name.gsub!(" ", "")
 
-      logger.info{ "Adding #{ ext_name })" }
+      logger.info{ "Adding #{ ext_name }" }
 
       issue_text = template_service.process_template(template: 'issue', data: xml_issue)
 
