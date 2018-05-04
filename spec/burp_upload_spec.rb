@@ -62,6 +62,7 @@ describe 'Burp upload plugin' do
       # create_issue should be called once for each issue in the xml
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:text]).to include("#[Title]#\nIssue 1")
+        expect(args[:id]).to eq(8781630)
         OpenStruct.new(args)
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
@@ -72,6 +73,7 @@ describe 'Burp upload plugin' do
 
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:text]).to include("#[Title]#\nIssue 2")
+        expect(args[:id]).to eq(8781631)
         OpenStruct.new(args)
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
@@ -80,8 +82,12 @@ describe 'Burp upload plugin' do
         expect(args[:node].label).to eq("10.0.0.1")
       end.once
 
+      # Issue 3 is an Extension finding so we need to confirm
+      # that it triggers process_extension_issues instead of process_burp_issues
+      # and the plugin_id is not set to the Type (134217728)
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:text]).to include("#[Title]#\nIssue 3")
+        expect(args[:id]).to eq("Issue3")
         OpenStruct.new(args)
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
@@ -92,6 +98,7 @@ describe 'Burp upload plugin' do
 
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:text]).to include("#[Title]#\nIssue 4")
+        expect(args[:id]).to eq(8781633)
         OpenStruct.new(args)
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
