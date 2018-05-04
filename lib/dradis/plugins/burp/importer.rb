@@ -43,6 +43,8 @@ module Dradis::Plugins::Burp
     end
 
     private
+
+    # Creates the Nodes/properties
     def process_report_host(xml_issue)
       host_label = xml_issue.at('host')['ip']
       host_label = xml_issue.at('host').text if host_label.empty?
@@ -56,6 +58,8 @@ module Dradis::Plugins::Burp
         affected_host.save
       end
 
+      # Burp extensions don't follow the "unique type for every Issue" logic
+      # so we have to deal with them separately
       if xml_issue.at('type').text.to_str == "134217728"
         process_extension_issues(affected_host, xml_issue)
       else
@@ -63,6 +67,7 @@ module Dradis::Plugins::Burp
       end
     end
     
+    # If the Issues come from the Burp app, use the type as the plugin_ic
     def process_burp_issues(affected_host, xml_issue)
       issue_name = xml_issue.at('name').text
       issue_type = xml_issue.at('type').text.to_i
@@ -93,6 +98,8 @@ module Dradis::Plugins::Burp
       content_service.create_evidence(issue: issue, node: affected_host, content: evidence_text)
     end
 
+    # If the Issues come from a Burp extension (type = 134217728), then
+    # use the name (spaces removed) as the plugin_id
     def process_extension_issues(affected_host, xml_issue)
       ext_name = xml_issue.at('name').text
       ext_name = ext_name.gsub!(" ", "")
