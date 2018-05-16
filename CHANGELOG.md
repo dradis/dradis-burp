@@ -6,6 +6,8 @@
 
 *   Fixes formatting errors including `<p>`, `<a href="">`, and `<table>` tags
 
+*   Findings with <type>134217728</type> are not bundled together into one Issue
+
 ## Dradis Framework 3.9 (January, 2018) ##
 
 *   Encode content with UTF-8 to avoid incompatible db errors (v3.8.1)
