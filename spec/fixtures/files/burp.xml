@@ -63,7 +63,7 @@
   </issue>
   <issue>
     <serialNumber>1833460934674078322</serialNumber>
-    <type>8781632</type>
+    <type>134217728</type>
     <name>Issue 3</name>
     <host ip="10.0.0.1">http://www.test.com</host>
     <path><![CDATA[/Common/login.aspx]]></path>
