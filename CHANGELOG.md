@@ -1,3 +1,7 @@
+## Dradis Framework 3.11 (November, 2018) ##
+
+*   No changes.
+
 ## Dradis Framework 3.10 (August, 2018) ##
 
 *   Adds `references` and `vulnerability_classifications` as available fields
