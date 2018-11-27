@@ -4,7 +4,12 @@ module Dradis
       class FieldProcessor < Dradis::Plugins::Upload::FieldProcessor
 
         def post_initialize(args={})
-          @burp_object = ::Burp::Issue.new(data)
+          @burp_object =
+            if data.is_a?(Nokogiri::XML::Element)
+              ::Burp::Xml::Issue.new(data)
+            else # Nokogiri::XML::NodeSet
+              ::Burp::Html::Issue.new(data)
+            end
         end
 
         def value(args={})
@@ -20,4 +25,3 @@ module Dradis
     end
   end
 end
-
