@@ -1,8 +1,5 @@
 module Burp
   module Html
-  # We use this string to replace invalid UTF-8 bytes with.
-  # INVALID_UTF_REPLACE = '<?>'
-
   # This class represents each of the issue elements in the Burp
   # Scanner HTML document: all elemennts from a span.BODH0 until the next
   # span.BODH0 (the next one excluded).
