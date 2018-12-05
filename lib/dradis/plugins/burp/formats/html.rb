@@ -29,7 +29,9 @@ module Dradis::Plugins::Burp::Formats
     end
 
     def process_html_issue(html_issue)
-      link       = html_issue.first.css('a').attr('href').value
+      header     = html_issue.first.css('a')
+      link       = header.attr('href').value
+      title      = header.text
       burp_id    = link[/\/(\d+)_.*/, 1]
       issue_id   = html_issue.attr('id').value
       issue_text =
@@ -38,7 +40,7 @@ module Dradis::Plugins::Burp::Formats
           data: html_issue
         )
 
-      logger.info { "Processing issue #{issue_id}" }
+      logger.info { "Processing issue #{issue_id}: #{title}" }
       issue = content_service.create_issue(text: issue_text, id: burp_id)
 
       # Evidence headers are like:
