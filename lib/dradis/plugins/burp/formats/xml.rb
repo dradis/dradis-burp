@@ -46,7 +46,8 @@ module Dradis::Plugins::Burp::Formats
 
       # Burp extensions don't follow the "unique type for every Issue" logic
       # so we have to deal with them separately
-      if xml_issue.at('type').text.to_str == '134217728'
+      burp_extension_type = '134217728'.freeze
+      if xml_issue.at('type').text.to_str == burp_extension_type
         process_extension_issues(affected_host, xml_issue)
       else
         process_burp_issues(affected_host, xml_issue)
