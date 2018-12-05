@@ -75,7 +75,7 @@ module Burp
       # look for the h2 headers in the html fragment
       method_name = translations_table.fetch(method, method.to_s)
       h2 = @html.xpath("//h2[text()='#{method_name}']").first
-      unless h2.nil?
+      if h2
         h2.next_element.css('br').each { |br| br.replace("\n") }
         return cleanup_html(h2.next_element.text)
       end
