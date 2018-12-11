@@ -32,7 +32,7 @@ module Dradis::Plugins::Burp::Formats
       header     = html_issue.first.css('a')
       link       = header.attr('href').value
       title      = header.text
-      burp_id    = link[/\/(\d+)_.*/, 1]
+      burp_id    = link[/\/([0-9a-f]+)_.*/, 1]
       issue_id   = html_issue.attr('id').value
       issue_text =
         template_service.process_template(
