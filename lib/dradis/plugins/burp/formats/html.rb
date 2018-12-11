@@ -29,10 +29,14 @@ module Dradis::Plugins::Burp::Formats
     end
 
     def process_html_issue(html_issue)
-      header     = html_issue.first.css('a')
-      link       = header.attr('href').value
-      title      = header.text
-      burp_id    = link[/\/([0-9a-f]+)_.*/, 1]
+      header     = html_issue.first
+      title      = header.text.gsub(/^\d+\.\S/, '')
+      burp_id =
+        if (link = header.css('a').first)
+          link.attr('href')[/\/([0-9a-f]+)_.*/, 1]
+        else
+          title
+        end
       issue_id   = html_issue.attr('id').value
       issue_text =
         template_service.process_template(

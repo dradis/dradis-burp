@@ -27,17 +27,21 @@ module Burp
     end
 
     def name
-      @html.first.css('a').text
+      @html.first.text.gsub(/^\d+\.\S/, '')
     end
 
     def link
-      @html.first.css('a').attr('href').value
+      @html.first.css('a').first
     end
 
     # Link looks like: https://portswigger.net/kb/issues/00200400_flash-cross-domain-policy
     # We use that 00200400 as type since in that page it calls it 'Type index'
     def type
-      link[/\/(\d+)_.*/, 1]
+      if link
+        link.attr('href')[/\/([0-9a-f]+)_.*/, 1]
+      else
+        name
+      end
     end
 
     # This method is invoked by Ruby when a method that is not defined in this
