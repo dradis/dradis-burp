@@ -22,7 +22,7 @@ module Dradis::Plugins::Burp
         return false
       end
 
-      if file_content.starts_with?('<html')
+      if File.extname(params[:file]) == '.html'
         import_html(file_content)
       else
         import_xml(file_content)
