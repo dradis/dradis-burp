@@ -40,7 +40,7 @@ module Dradis::Plugins::Burp::Formats
       issue_id   = html_issue.attr('id').value
       issue_text =
         template_service.process_template(
-          template: 'issue',
+          template: 'html_issue',
           data: html_issue
         )
 
@@ -79,7 +79,7 @@ module Dradis::Plugins::Burp::Formats
 
       evidence_text =
         template_service.process_template(
-          template: 'evidence',
+          template: 'html_evidence',
           data: html_evidence
         )
 

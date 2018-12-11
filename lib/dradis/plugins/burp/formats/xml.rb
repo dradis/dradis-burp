@@ -86,7 +86,7 @@ module Dradis::Plugins::Burp::Formats
     def create_issue(affected_host:, id:, xml_issue:)
       issue_text =
         template_service.process_template(
-          template: 'issue',
+          template: 'xml_issue',
           data: xml_issue
         )
 
@@ -105,7 +105,7 @@ module Dradis::Plugins::Burp::Formats
 
       evidence_text =
         template_service.process_template(
-          template: 'evidence',
+          template: 'xml_evidence',
           data: xml_issue
         )
 
