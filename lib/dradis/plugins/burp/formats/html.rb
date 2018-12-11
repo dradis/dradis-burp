@@ -111,8 +111,8 @@ module Dradis::Plugins::Burp::Formats
       return nil if start_element.empty?
 
       ending_element = @doc.xpath("//span[@id='#{next_id}']")
-      if ending_element.nil? && /\d+\.\d+/ =~ id
-        next_id = is.split('.')[0].to_i + 1
+      if ending_element.empty? && /\d+\.\d+/ =~ id
+        next_id = id.split('.')[0].to_i + 1
         ending_element = @doc.xpath("//span[@id='#{next_id}']")
       end
 
