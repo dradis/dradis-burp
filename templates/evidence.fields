@@ -5,3 +5,4 @@ issue.severity
 issue.confidence
 issue.request
 issue.response
+issue.detail
