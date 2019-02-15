@@ -1,3 +1,7 @@
+## Dradis Framework 3.12 (XXXX, 2019) ##
+
+*   Make `issue.detail` available at the Evidence level
+
 ## Dradis Framework 3.11 (November, 2018) ##
 
 *   No changes.
