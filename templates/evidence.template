@@ -1,9 +1,6 @@
 #[Host]#
 %issue.host%
 
-#[Details]#
-%issue.detail%
-
 #[Path]#
 %issue.path%
 
