@@ -40,7 +40,7 @@ module Dradis::Plugins::Burp::Formats
       issue_id   = html_issue.attr('id').value
       issue_text =
         template_service.process_template(
-          template: 'html_issue',
+          template: 'issue',
           data: html_issue
         )
 
