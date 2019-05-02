@@ -24,7 +24,7 @@ module Dradis::Plugins::Burp
 
       if File.extname(params[:file]) == '.html'
         import_html(file_content)
-      else
+      elsif File.extname(params[:file]) == '.xml'
         import_xml(file_content)
       end
     end
