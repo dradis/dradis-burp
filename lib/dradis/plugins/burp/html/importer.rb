@@ -41,7 +41,7 @@ module Dradis::Plugins::Burp
         title      = header.text.gsub(/^\d+\.\S/, '')
         burp_id =
           if (link = header.css('a').first)
-            link.attr('href')[/\/([0-9a-f]+)_.*/, 1]
+            link.attr('href')[/\/([0-9a-f]+)_.*/, 1].to_i(16)
           else
             title
           end

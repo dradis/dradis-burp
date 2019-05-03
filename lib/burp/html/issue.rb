@@ -21,8 +21,8 @@ module Burp
         # tags with contents retrieved following the span header
         :background, :remediation_background, :detail,
         :remediation_detail, :references, :vulnerability_classifications,
-        :request_1, :request_2, :request_3,
-        :response_1, :response_2, :response_3
+        :request, :request_2, :request_3,
+        :response, :response_2, :response_3
       ] + summary_table_tags
     end
 
@@ -38,7 +38,7 @@ module Burp
     # We use that 00200400 as type since in that page it calls it 'Type index'
     def type
       if link
-        link.attr('href')[/\/([0-9a-f]+)_.*/, 1]
+        link.attr('href')[/\/([0-9a-f]+)_.*/, 1].to_i(16)
       else
         name
       end
@@ -68,8 +68,8 @@ module Burp
         remediation_detail: 'Remediation detail',
         vulnerability_classifications: 'Vulnerability classifications',
         serial_number: 'Serial number',
-        request_1: 'Request 1',
-        response_1: 'Response 1',
+        request: 'Request',
+        response: 'Response',
         request_2: 'Request 2',
         response_2: 'Response 2',
         request_3: 'Request 3',

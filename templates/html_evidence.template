@@ -26,14 +26,6 @@ bc.. %issue.request%
 bc.. %issue.response%
 
 
-#[Request 1]#
-bc.. %issue.request_1%
-
-
-#[Response 1]#
-bc.. %issue.response_1%
-
-
 #[Request 2]#
 bc.. %issue.request_2%
 

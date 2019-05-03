@@ -19,6 +19,10 @@ module Dradis
             Dradis::Plugins::Burp::Xml
           ]
         end
+
+        def self.plugin_name
+          'burp'
+        end
       end
     end
   end
