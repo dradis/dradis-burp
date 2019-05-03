@@ -12,6 +12,10 @@ module Dradis::Plugins::Burp
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      def initialize(args={})
+        args[:plugin] = Dradis::Plugins::Burp
+        super(args)
+      end
       def import(params = {})
         file_content = File.read(params[:file])
 
