@@ -20,6 +20,8 @@ module Dradis
           ]
         end
 
+        # We define Dadis::Plugins::Burp::[Html/Xml]::Engine
+        # But we still want the plugin name to be 'burp' 
         def self.plugin_name
           'burp'
         end
