@@ -59,29 +59,35 @@ module Burp
         return
       end
 
-      # First we try the attributes. In Ruby we use snake_case, but in XML
-      # CamelCase is used for some attributes
+      # First we try the h2 headers.
       translations_table = {
-        background: 'Issue background',
+        background: ['Issue background', 'Issue description'],
         detail: 'Issue detail',
-        remediation_background: 'Remediation background',
+        references: 'References',
+        remediation_background: ['Remediation background', 'Issue remediation'],
         remediation_detail: 'Remediation detail',
-        vulnerability_classifications: 'Vulnerability classifications',
-        serial_number: 'Serial number',
         request: 'Request',
-        response: 'Response',
         request_2: 'Request 2',
-        response_2: 'Response 2',
         request_3: 'Request 3',
-        response_3: 'Response 3'
+        response: 'Response',
+        response_2: 'Response 2',
+        response_3: 'Response 3',
+        serial_number: 'Serial number',
+        vulnerability_classifications: 'Vulnerability classifications'
       }
 
       # look for the h2 headers in the html fragment
-      method_name = translations_table.fetch(method, method.to_s)
-      h2 = @html.xpath("//h2[text()='#{method_name}']").first
+      method_names = translations_table.fetch(method, method.to_s)
+      method_names = [method_names].flatten
+
+      h2 = nil
+      method_names.each do |method_name|
+        h2 = @html.xpath("//h2[text()='#{method_name}']").first
+        break if h2
+      end
+
       if h2
-        h2.next_element.css('br').each { |br| br.replace("\n") }
-        return cleanup_html(h2.next_element.text)
+        return cleanup_html(h2.next_element.inner_html)
       end
 
       # look inside the summary table in the html fragment
@@ -90,6 +96,7 @@ module Burp
 
     private
 
+    # Returns the summary table in the HTML file as a Hash
     def summary
       @summary ||= begin
         @summary = {}
