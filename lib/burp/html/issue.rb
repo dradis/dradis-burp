@@ -9,7 +9,7 @@ module Burp
   class Issue < ::Burp::Issue
     # Accepts a Nokogiri::XML::NodeSet
     def initialize(html)
-      @html = html
+      @html = Nokogiri::HTML(html.to_s)
     end
 
     # List of supported tags
@@ -26,22 +26,23 @@ module Burp
       ] + summary_table_tags
     end
 
-    def name
-      @html.first.text.gsub(/^\d+\.\S/, '')
+    def header
+      @header ||= @html.at_css('span')
     end
 
-    def link
-      @html.first.css('a').first
+    def name
+      @name ||= header.text.gsub(/^\d+\.\S/, '')
     end
 
     # Link looks like: https://portswigger.net/kb/issues/00200400_flash-cross-domain-policy
     # We use that 00200400 as type since in that page it calls it 'Type index'
     def type
-      if link
-        link.attr('href')[/\/([0-9a-f]+)_.*/, 1].to_i(16)
-      else
-        name
-      end
+      @type ||=
+        if header_link = header.at_css('a')
+          header_link.attr('href').to_s[/\/([0-9a-f]+)_.*/, 1].to_i(16)
+        else
+          nil
+        end
     end
 
     # This method is invoked by Ruby when a method that is not defined in this
@@ -66,10 +67,10 @@ module Burp
         references: 'References',
         remediation_background: ['Remediation background', 'Issue remediation'],
         remediation_detail: 'Remediation detail',
-        request: 'Request',
+        request: 'Request 1',
         request_2: 'Request 2',
         request_3: 'Request 3',
-        response: 'Response',
+        response: 'Response 1',
         response_2: 'Response 2',
         response_3: 'Response 3',
         serial_number: 'Serial number',
@@ -96,7 +97,7 @@ module Burp
 
     private
 
-    # Returns the summary table in the HTML file as a Hash
+    # Returns the summary table in the HTML fragment as a Hash
     def summary
       @summary ||= begin
         @summary = {}
