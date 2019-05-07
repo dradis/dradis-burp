@@ -21,8 +21,8 @@ module Burp
         # tags with contents retrieved following the span header
         :background, :remediation_background, :detail,
         :remediation_detail, :references, :vulnerability_classifications,
-        :request, :request_2, :request_3,
-        :response, :response_2, :response_3
+        :request, :request_1, :request_2, :request_3,
+        :response, :response_1, :response_2, :response_3
       ] + summary_table_tags
     end
 
@@ -67,10 +67,12 @@ module Burp
         references: 'References',
         remediation_background: ['Remediation background', 'Issue remediation'],
         remediation_detail: 'Remediation detail',
-        request: 'Request 1',
+        request: 'Request',
+        request_1: 'Request 1',
         request_2: 'Request 2',
         request_3: 'Request 3',
-        response: 'Response 1',
+        response: 'Response',
+        response_1: 'Response 1',
         response_2: 'Response 2',
         response_3: 'Response 3',
         serial_number: 'Serial number',
