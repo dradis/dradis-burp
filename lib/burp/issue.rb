@@ -21,6 +21,9 @@ module Burp
       result.gsub!(/&gt;/, '>')
       result.gsub!(/&nbsp;/, ' ')
 
+      result.gsub!(/<span.*?>/, '')
+      result.gsub!(/<\/span>/, '')
+      
       result.gsub!(/<b>(.*?)<\/b>/, '*\1*')
       result.gsub!(/<br>|<\/br>/){"\n"}
       result.gsub!(/<font.*?>(.*?)<\/font>/m, '\1')
