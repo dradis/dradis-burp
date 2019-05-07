@@ -23,7 +23,7 @@ module Burp
 
       result.gsub!(/<span.*?>/, '')
       result.gsub!(/<\/span>/, '')
-      
+
       result.gsub!(/<b>(.*?)<\/b>/, '*\1*')
       result.gsub!(/<br>|<\/br>/){"\n"}
       result.gsub!(/<font.*?>(.*?)<\/font>/m, '\1')
@@ -34,7 +34,7 @@ module Burp
 
       result.gsub!(/<ul>(.*?)<\/ul>/m){|m| "#{ $1 }\n"}
       result.gsub!(/<li>(.*?)<\/li>/m){|m| "\n* #{ $1 }"}
-      result.gsub!(/<a href=\"(.*?)\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<a href=\"(.*?)\">(.*?)<\/a>/im) { "\"#{$2.strip}\":#{$1.strip}" }
 
       result.gsub!(/<table>(.*?)<\/table>/m){|m| "\n\n#{ $1 }\n\n" }
       result.gsub!(/<tr>(.*?)<\/tr>/m){|m| "|#{ $1 }\n" }
