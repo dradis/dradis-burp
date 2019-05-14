@@ -21,7 +21,7 @@ class BurpTasks < Thor
         Dradis::Plugins::Burp::Html::Importer.new(task_options)
       else
         $stderr.puts "** Unsupported file. Must be .xml or .html"
-        exit(-1)
+        exit(-2)
       end
 
     importer.import(file: file_path)
