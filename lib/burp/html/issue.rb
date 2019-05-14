@@ -16,13 +16,14 @@ module Burp
     def supported_tags
       [
         # tags with contents retrieved from inside the span header
-        :type, :name,
+        :name, :type,
 
         # tags with contents retrieved following the span header
-        :background, :remediation_background, :detail,
-        :remediation_detail, :references, :vulnerability_classifications,
+        :background, :detail,
+        :references, :remediation_background, :remediation_detail,
         :request, :request_1, :request_2, :request_3,
-        :response, :response_1, :response_2, :response_3
+        :response, :response_1, :response_2, :response_3,
+        :vulnerability_classifications
       ] + summary_table_tags
     end
 
@@ -120,7 +121,7 @@ module Burp
     # List of supported tags to obtain from the summary html table
     def summary_table_tags
       [
-        :host, :severity, :path, :confidence
+        :confidence, :host, :path, :severity
       ]
     end
 

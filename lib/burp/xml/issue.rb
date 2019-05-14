@@ -23,9 +23,10 @@ module Burp
         # attributes
 
         # simple tags
-        :serial_number, :type, :name, :host, :path, :location, :severity,
-        :confidence, :background, :remediation_background, :detail,
-        :remediation_detail, :references, :vulnerability_classifications,
+        :background, :confidence, :detail, :host, :location, :name, :path,
+        :references, :remediation_background, :remediation_detail,
+        :serial_number, :severity, :type,
+        :vulnerability_classifications,
 
         # nested tags
         :request, :response
@@ -52,12 +53,12 @@ module Burp
       # First we try the attributes. In Ruby we use snake_case, but in XML
       # CamelCase is used for some attributes
       translations_table = {
-        :background => 'issueBackground',
-        :detail => 'issueDetail',
-        :remediation_background => 'remediationBackground',
-        :remediation_detail => 'remediationDetail',
-        :vulnerability_classifications => 'vulnerabilityClassifications',
-        :serial_number => 'serialNumber'
+        background: 'issueBackground',
+        detail: 'issueDetail',
+        remediation_background: 'remediationBackground',
+        remediation_detail: 'remediationDetail',
+        vulnerability_classifications: 'vulnerabilityClassifications',
+        serial_number: 'serialNumber'
       }
 
       method_name = translations_table.fetch(method, method.to_s)
