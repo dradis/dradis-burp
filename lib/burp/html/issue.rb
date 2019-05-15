@@ -91,7 +91,14 @@ module Burp
       end
 
       if h2
-        return cleanup_html(h2.next_element.inner_html)
+        content =
+          if h2.text =~ /^(Request|Response)/
+            cleanup_request_response_html(h2.next_element.inner_html)
+          else
+            cleanup_html(h2.next_element.inner_html)
+          end
+
+        return content
       end
 
       # look inside the summary table in the html fragment
@@ -99,6 +106,26 @@ module Burp
     end
 
     private
+
+    # In Request/Response html snippets we don't want to cleanup the whole
+    # html as we ususally do. The snippets may contain html code to be displayed,
+    # and we don't want to convert that to textile.
+    def cleanup_request_response_html(source)
+      result = source.dup
+
+      result.gsub!(/<b>(.*?)<\/b>/, '\1')
+      result.gsub!(/<br>|<\/br>/){"\n"}
+      result.gsub!(/<span.*?>/, '')
+      result.gsub!(/<\/span>/, '')
+
+      result.gsub!(/&quot;/, '"')
+      result.gsub!(/&amp;/, '&')
+      result.gsub!(/&lt;/, '<')
+      result.gsub!(/&gt;/, '>')
+      result.gsub!(/&nbsp;/, ' ')
+
+      result
+    end
 
     # Returns the summary table in the HTML fragment as a Hash
     def summary
