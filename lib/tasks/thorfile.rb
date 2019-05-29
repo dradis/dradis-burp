@@ -3,18 +3,27 @@ class BurpTasks < Thor
 
   namespace "dradis:plugins:burp"
 
-  desc "upload FILE", "upload Burp XML results"
+  desc "upload FILE", "upload Burp XML or HTML results"
   def upload(file_path)
     require 'config/environment'
 
     unless File.exists?(file_path)
       $stderr.puts "** the file [#{file_path}] does not exist"
-      exit -1
+      exit(-1)
     end
 
     detect_and_set_project_scope
 
-    importer = Dradis::Plugins::Burp::Importer.new(task_options)
+    importer =
+      if File.extname(file_path) == '.xml'
+        Dradis::Plugins::Burp::Xml::Importer.new(task_options)
+      elsif File.extname(file_path) == '.html'
+        Dradis::Plugins::Burp::Html::Importer.new(task_options)
+      else
+        $stderr.puts "** Unsupported file. Must be .xml or .html"
+        exit(-2)
+      end
+
     importer.import(file: file_path)
   end
 
