@@ -1,0 +1,36 @@
+<span class="BODH1" id="2.1">2.1.&nbsp;http://mdsec.net/addressbook/32/Default.aspx [Address parameter]</span>
+<br><a class="PREVNEXT" href="#2.2">Next</a>
+<br>
+<h2>Summary</h2>
+<table cellpadding="0" cellspacing="0" class="summary_table">
+<tr>
+<td rowspan="4" class="icon" valign="top" align="center"><img width="32" height="32" src="images/scan_issue_high_certain_rpt.png"></td>
+<td>Severity:&nbsp;&nbsp;</td>
+<td><b>High</b></td>
+</tr>
+<tr>
+<td>Confidence:&nbsp;&nbsp;</td>
+<td><b>Certain</b></td>
+</tr>
+<tr>
+<td>Host:&nbsp;&nbsp;</td>
+<td><b>http://mdsec.net</b></td>
+</tr>
+<tr>
+<td>Path:&nbsp;&nbsp;</td>
+<td><b>/addressbook/32/Default<wbr>.aspx</b></td>
+</tr>
+</table>
+<h2>Issue detail</h2>
+<span class="TEXT">The <b>Address</b> parameter appears to be vulnerable to SQL injection attacks. A single quote was submitted in the Address parameter, and a database error message was returned. Two single quotes were then submitted and the error message disappeared. You should review the contents of the error message, and the application's handling of other input, to confirm whether a vulnerability is present.<br><br>The database appears to be Microsoft SQL Server.</span>
+<h2>Remediation detail</h2>
+<span class="TEXT">The application should handle errors gracefully and prevent SQL error messages from being returned in responses. </span>
+<h2>Request 1</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=&amp;Phone=<wbr>&amp;Search=Search&amp;Address=<span class="HIGHLIGHT">'</span>&amp;Age=</span></div>
+<h2>Response 1</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2642<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br>&lt;b&gt;Error: <span class="HIGHLIGHT">Unclosed quotation mark</span> after the character string ''.<br><span class="HIGHLIGHT">Incorrect syntax near</span> ''.&lt;/b&gt;<br><b>...[SNIP]...</b><br></span></div>
+<h2>Request 2</h2>
+<div class="rr_div"><span>POST /addressbook/32/Default<wbr>.aspx HTTP/1.1<br>Host: mdsec.net<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0<br>Accept: text/html,application<wbr>/xhtml+xml,application<wbr>/xml;q=0.9,*/*;q=0.8<br>Accept-Language: en-US,en;q=0.5<br>Accept-Encoding: gzip, deflate<br>Referer: http://mdsec.net<wbr>/addressbook/32/<br>Connection: keep-alive<br>Content-Type: application/x-www-form<wbr>-urlencoded<br>Content-Length: 116<br><br>__VIEWSTATE=%2FwEPDw<wbr>UKMTI0NzE5MjI0MGRkoX<wbr>v4BXfugQRsGddxJO96PBvk5rI<wbr>%3D&amp;Name=&amp;Email=&amp;Phone=<wbr>&amp;Search=Search&amp;Address=<span class="HIGHLIGHT">''</span>&amp;Age=</span></div>
+<h2>Response 2</h2>
+<div class="rr_div"><span>HTTP/1.1 200 OK<br>Date: Wed, 10 Apr 2013 12:40:58 GMT<br>Server: Microsoft-IIS/6.0<br>MicrosoftOfficeWebServer: 5.0_Pub<br>X-Powered-By: ASP.NET<br>X-AspNet-Version: 2.0.50727<br>Cache-Control: private<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 2721<br><br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR<wbr>/xhtml1/DTD/xhtml1<wbr>-transitional.dtd"&gt;<br>&lt;html xmlns="http://www.w3.org<wbr>/1999/xhtml" &gt;<br>&lt;head&gt;<br>&lt;title&gt;Contacts&lt;/title&gt;<br><b>...[SNIP]...</b><br></span></div>
+<div class="rule"></div>
