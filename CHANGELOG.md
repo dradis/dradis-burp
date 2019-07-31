@@ -1,4 +1,8 @@
-## Dradis Framework 3.13 (XXX, 2019) ##
+## Dradis Framework 3.14 (August, 2019) ##
+
+*   No changes.
+
+## Dradis Framework 3.13 (June, 2019) ##
 
 *   Include parsing Burp Html output
 
