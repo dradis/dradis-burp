@@ -13,7 +13,7 @@ module Dradis::Plugins::Burp
 
     class Importer < Dradis::Plugins::Upload::Importer
       BURP_EXTENSION_TYPE = '134217728'.freeze
-      BURP_SEVERITIES     = ['Information', 'Low', 'Medium', 'High', 'Critical'].freeze
+      BURP_SEVERITIES     = ['Information', 'Low', 'Medium', 'High'].freeze
 
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Burp
