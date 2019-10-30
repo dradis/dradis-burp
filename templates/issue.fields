@@ -1,7 +1,8 @@
-issue.name
 issue.background
-issue.remediation_background
 issue.detail
-issue.remediation_detail
+issue.name
 issue.references
+issue.remediation_background
+issue.remediation_detail
+issue.severity
 issue.vulnerability_classifications

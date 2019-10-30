@@ -2,6 +2,10 @@
 %issue.name%
 
 
+#[Severity]#
+%issue.severity%
+
+
 #[Background]#
 %issue.background%
 

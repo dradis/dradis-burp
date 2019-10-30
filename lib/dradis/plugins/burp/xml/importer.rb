@@ -12,10 +12,14 @@ module Dradis::Plugins::Burp
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      BURP_EXTENSION_TYPE = '134217728'.freeze
+      BURP_SEVERITIES     = ['Information', 'Low', 'Medium', 'High'].freeze
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Burp
         super(args)
       end
+
       def import(params = {})
         file_content = File.read(params[:file])
 
@@ -33,80 +37,39 @@ module Dradis::Plugins::Burp
         logger.info { 'Done.' }
 
         if doc.root.name != 'issues'
-          error = "Document doesn't seem to be in the Burp Scanner XML format."
+          error = 'Document doesn\'t seem to be in the Burp Scanner XML format.'
           logger.fatal { error }
           content_service.create_note text: error
           return false
         end
 
         # This will be filled in by the Processor while iterating over the issues
-        @hosts         = []
-        @affected_host = nil
-        @issue_text    = nil
-        @evidence_text = nil
+        @issues     = []
+        @severities = Hash.new(0)
 
+        # We need to look ahead through all issues to bring the highest severity
+        # of each instance to the Issue level.
         doc.xpath('issues/issue').each do |xml_issue|
-          process_issue(xml_issue)
+          issue_id       = issue_id_for(xml_issue)
+          issue_severity = BURP_SEVERITIES.index(xml_issue.at('severity').text)
+
+          @severities[issue_id] = issue_severity if issue_severity > @severities[issue_id]
+          @issues << xml_issue
         end
+
+        @issues.each { |xml_issue| process_issue(xml_issue) }
 
         logger.info { 'Burp Scanner results successfully imported' }
         true
       end
 
-      # Creates the Nodes/properties
-      def process_issue(xml_issue)
-        host_label = xml_issue.at('host')['ip']
-        host_label = xml_issue.at('host').text if host_label.empty?
-        affected_host = content_service.create_node(label: host_label, type: :host)
-        logger.info { "\taffects: #{host_label}" }
-
-        unless @hosts.include?(affected_host.label)
-          @hosts << affected_host.label
-          url = xml_issue.at('host').text
-          affected_host.set_property(:hostname, url)
-          affected_host.save
-        end
-
-        # Burp extensions don't follow the "unique type for every Issue" logic
-        # so we have to deal with them separately
-        burp_extension_type = '134217728'.freeze
-        if xml_issue.at('type').text.to_str == burp_extension_type
-          process_extension_issues(affected_host, xml_issue)
-        else
-          process_burp_issues(affected_host, xml_issue)
-        end
-      end
-
-      # If the Issues come from the Burp app, use the type as the plugin_ic
-      def process_burp_issues(affected_host, xml_issue)
-        issue_name = xml_issue.at('name').text
-        issue_type = xml_issue.at('type').text.to_i
-
-        logger.info { "Adding #{issue_name} (#{issue_type})" }
-
-        create_issue(
-          affected_host: affected_host,
-          id: issue_type,
-          xml_issue: xml_issue
-        )
-      end
-
-      # If the Issues come from a Burp extension (type = 134217728), then
-      # use the name (spaces removed) as the plugin_id
-      def process_extension_issues(affected_host, xml_issue)
-        ext_name = xml_issue.at('name').text
-        ext_name = ext_name.gsub!(" ", "")
-
-        logger.info { "Adding #{ext_name}" }
-
-        create_issue(
-          affected_host: affected_host,
-          id: ext_name,
-          xml_issue: xml_issue
-        )
-      end
-
+      private
       def create_issue(affected_host:, id:, xml_issue:)
+        xml_evidence = xml_issue.clone
+
+        # Ensure that the Issue contains the highest Severity value
+        xml_issue.at('severity').content = BURP_SEVERITIES[@severities[id]]
+
         issue_text =
           template_service.process_template(
             template: 'issue',
@@ -129,7 +92,7 @@ module Dradis::Plugins::Burp
         evidence_text =
           template_service.process_template(
             template: 'evidence',
-            data: xml_issue
+            data: xml_evidence
           )
 
         if evidence_text.include?(::Burp::INVALID_UTF_REPLACE)
@@ -143,6 +106,37 @@ module Dradis::Plugins::Burp
           issue: issue,
           node: affected_host,
           content: evidence_text
+        )
+      end
+
+      # Burp extensions don't follow the "unique type for every Issue" logic
+      # so we have to deal with them separately
+      def issue_id_for(xml_issue)
+        if xml_issue.at('type').text == BURP_EXTENSION_TYPE
+          xml_issue.at('name').text.gsub!(' ', '')
+        else
+          xml_issue.at('type').text.to_i
+        end
+      end
+
+      # Creates the Nodes/properties
+      def process_issue(xml_issue)
+        host_url   = xml_issue.at('host').text
+        host_label = xml_issue.at('host')['ip']
+        host_label = host_url if host_label.empty?
+        issue_id   = issue_id_for(xml_issue)
+
+        affected_host = content_service.create_node(label: host_label, type: :host)
+        affected_host.set_property(:hostname, host_url)
+        affected_host.save
+
+        logger.info { "Adding #{xml_issue.at('name').text} (#{issue_id})"}
+        logger.info { "\taffects: #{host_label}" }
+
+        create_issue(
+          affected_host: affected_host,
+          id: issue_id,
+          xml_issue: xml_issue
         )
       end
     end

@@ -4,7 +4,7 @@ require 'ostruct'
 describe 'Burp upload plugin' do
 
   describe Burp::Xml::Issue do
-    it "handles invalid utf-8 bytes" do
+    it 'handles invalid utf-8 bytes' do
       doc = Nokogiri::XML(File.read('spec/fixtures/files/invalid-utf-issue.xml'))
       xml_issue = doc.xpath('issues/issue').first
       issue = Burp::Xml::Issue.new(xml_issue)
@@ -49,7 +49,7 @@ describe 'Burp upload plugin' do
       end
     end
 
-    it "creates nodes, issues, and evidence as needed" do
+    it 'creates nodes, issues, and evidence as needed' do
 
       # Host node
       #
@@ -112,6 +112,46 @@ describe 'Burp upload plugin' do
       @importer.import(file: 'spec/fixtures/files/burp.xml')
     end
 
+    it 'returns the highest <severity> at the Issue level' do
+
+      # create_issue should be called once for each issue in the xml
+      expect(@content_service).to receive(:create_issue) do |args|
+        expect(args[:id]).to eq(8781630)
+        expect(args[:text]).to include("#[Title]#\nIssue 1")
+        expect(args[:text]).to include("#[Severity]#\nCritical")
+        OpenStruct.new(args)
+      end
+
+      expect(@content_service).to receive(:create_evidence) do |args|
+        expect(args[:content]).to include("#[Severity]#\nInformation")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:node].label).to eq('10.0.0.1')
+      end.once
+      expect(@content_service).to receive(:create_evidence) do |args|
+        expect(args[:content]).to include("#[Severity]#\nHigh")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:node].label).to eq('10.0.0.1')
+        OpenStruct.new(args)
+      end.once
+      expect(@content_service).to receive(:create_evidence) do |args|
+        expect(args[:content]).to include("#[Severity]#\nMedium")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:node].label).to eq('10.0.0.1')
+      end.once
+      expect(@content_service).to receive(:create_evidence) do |args|
+        expect(args[:content]).to include("#[Severity]#\nCritical")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:node].label).to eq('10.0.0.1')
+      end.once
+      expect(@content_service).to receive(:create_evidence) do |args|
+        expect(args[:content]).to include("#[Severity]#\nLow")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:node].label).to eq('10.0.0.1')
+      end.once
+
+      # Run the import
+      @importer.import(file: 'spec/fixtures/files/burp_issue_severity.xml')
+    end
   end
 
   describe  Dradis::Plugins::Burp::Html::Importer do
