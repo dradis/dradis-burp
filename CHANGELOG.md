@@ -1,6 +1,10 @@
-## Dradis Framework 3.15 (November, 2019) ##
+## dradis framework 3.16 (february, 2020) ##
 
-*   Make `issue.severity` available at the Issue level.
+*   No changes.
+
+## dradis framework 3.15 (november, 2019) ##
+
+*   make `issue.severity` available at the issue level.
 
 ## Dradis Framework 3.14 (August, 2019) ##
 
