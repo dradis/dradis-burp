@@ -45,8 +45,8 @@
   </issue>
   <issue>
     <serialNumber>1833460934674078321</serialNumber>
-    <type>8781630</type>
-    <name>Issue 1</name>
+    <type>8781631</type>
+    <name>Issue 2</name>
     <host ip="10.0.0.1">http://www.test.com</host>
     <path><![CDATA[/Common/login.aspx]]></path>
     <location><![CDATA[/Common/login.aspx]]></location>
@@ -63,8 +63,8 @@
   </issue>
   <issue>
     <serialNumber>1833460934674078322</serialNumber>
-    <type>8781630</type>
-    <name>Issue 1</name>
+    <type>134217728</type>
+    <name>Issue 3</name>
     <host ip="10.0.0.1">http://www.test.com</host>
     <path><![CDATA[/Common/login.aspx]]></path>
     <location><![CDATA[/Common/login.aspx]]></location>
@@ -81,12 +81,12 @@
   </issue>
   <issue>
     <serialNumber>1833460934674078323</serialNumber>
-    <type>8781630</type>
-    <name>Issue 1</name>
+    <type>8781632</type>
+    <name>Issue 4</name>
     <host ip="10.0.0.1">http://www.test.com</host>
     <path><![CDATA[/Common/login.aspx]]></path>
     <location><![CDATA[/Common/login.aspx]]></location>
-    <severity>Critical</severity>
+    <severity>High</severity>
     <confidence>Firm</confidence>
     <issueBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam fugiat possimus quaerat esse aspernatur cumque, fugit incidunt tempora nam ex atque, magni alias ullam illo voluptate sed consequatur reprehenderit qui.]]></issueBackground>
     <remediationBackground><![CDATA[Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo itaque unde numquam, nihil eveniet deleniti dignissimos architecto quo neque ea impedit nam autem iusto iste, esse, aut minus animi repellat.]]></remediationBackground>
@@ -99,8 +99,8 @@
   </issue>
   <issue>
     <serialNumber>1833460934674078323</serialNumber>
-    <type>8781630</type>
-    <name>Issue 1</name>
+    <type>8781633</type>
+    <name>Issue 5</name>
     <host ip="10.0.0.1">http://www.test.com</host>
     <path><![CDATA[/Common/login.aspx]]></path>
     <location><![CDATA[/Common/login.aspx]]></location>
