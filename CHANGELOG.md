@@ -1,4 +1,4 @@
-## Dradis Framework 3.18 (Jul, 2020) ##
+## Dradis Framework 3.18 (July, 2020) ##
 
 *   No changes.
 
