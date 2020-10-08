@@ -113,6 +113,9 @@ module Burp
     def cleanup_request_response_html(source)
       result = source.dup
 
+      # Highlight code
+      result.gsub!(/<span class="HIGHLIGHT">(.+?)<\/span>/, '$${{\1}}$$')
+
       result.gsub!(/<b>(.*?)<\/b>/, '\1')
       result.gsub!(/<br>|<\/br>/){"\n"}
       result.gsub!(/<span.*?>/, '')
