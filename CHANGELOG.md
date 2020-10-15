@@ -1,3 +1,7 @@
+## Dradis Framework 3.20 (XXX, 2020) ##
+
+*   Make `issue.detail` available at the Evidence level for HTML uploads.
+
 ## Dradis Framework 3.19 (September, 2020) ##
 
 *   No changes.
