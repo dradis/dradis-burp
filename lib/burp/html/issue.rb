@@ -19,7 +19,7 @@ module Burp
         :name, :type,
 
         # tags with contents retrieved following the span header
-        :background, :detail,
+        :background, :detail, :location,
         :references, :remediation_background, :remediation_detail,
         :request, :request_1, :request_2, :request_3,
         :response, :response_1, :response_2, :response_3,
@@ -83,6 +83,18 @@ module Burp
       # look for the h2 headers in the html fragment
       method_names = translations_table.fetch(method, method.to_s)
       method_names = [method_names].flatten
+
+      # Process the Location field
+      if method.to_s == 'location'
+        location = @html.at_xpath('//span[contains(@class, "BODH1")]')&.text
+
+        if location
+          # Remove the header number
+          return location.split(/[[:space:]]/).drop(1).join(' ')
+        else
+          return 'n/a'
+        end
+      end
 
       h2 = nil
       method_names.each do |method_name|
