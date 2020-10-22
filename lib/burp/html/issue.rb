@@ -89,7 +89,8 @@ module Burp
         location = @html.at_xpath('//span[contains(@class, "BODH1")]')&.text
 
         if location
-          # Remove the header number
+          # Remove the header number from the text.
+          # E.g. <span class="BODH1" id="1.1">1.1.&nbsp;/sample/text/</span>
           return location.split(/[[:space:]]/).drop(1).join(' ')
         else
           return 'n/a'
