@@ -86,7 +86,7 @@ module Burp
 
       # Process the Location field
       if method.to_s == 'location'
-        location = @html.at_xpath('//span[contains(@class, "BODH1")]')&.text
+        location = @html.at_xpath('/html/body/span[contains(@class, "BODH1")]')&.text
 
         if location
           # Remove the header number from the text.
