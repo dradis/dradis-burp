@@ -1,3 +1,7 @@
+## Dradis Framework 3.20 (XXX, 2020) ##
+
+*  Make `issue.location` available at the HTML Evidence level.
+
 ## Dradis Framework 3.19 (September, 2020) ##
 
 *   No changes.

@@ -114,11 +114,10 @@ describe 'Burp upload plugin' do
 
     it 'returns the highest <severity> at the Issue level' do
 
-      # create_issue should be called once for each issue in the xml
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:id]).to eq(8781630)
         expect(args[:text]).to include("#[Title]#\nIssue 1")
-        expect(args[:text]).to include("#[Severity]#\nCritical")
+        expect(args[:text]).to include("#[Severity]#\nInformation")
         OpenStruct.new(args)
       end
 
@@ -129,23 +128,23 @@ describe 'Burp upload plugin' do
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("#[Severity]#\nHigh")
-        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 2")
         expect(args[:node].label).to eq('10.0.0.1')
         OpenStruct.new(args)
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("#[Severity]#\nMedium")
-        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 3")
         expect(args[:node].label).to eq('10.0.0.1')
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
-        expect(args[:content]).to include("#[Severity]#\nCritical")
-        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:content]).to include("#[Severity]#\nHigh")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 4")
         expect(args[:node].label).to eq('10.0.0.1')
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("#[Severity]#\nLow")
-        expect(args[:issue].text).to include("#[Title]#\nIssue 1")
+        expect(args[:issue].text).to include("#[Title]#\nIssue 5")
         expect(args[:node].label).to eq('10.0.0.1')
       end.once
 
@@ -208,6 +207,7 @@ describe 'Burp upload plugin' do
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+        expect(args[:content]).to include("#[Location]#\nhttp://1.1.1.1/dradis/sessions")
         expect(args[:issue].text).to include("#[Title]#\nStrict transport security not enforced")
         expect(args[:node].label).to eq("github.com/dradis/dradis-burp")
       end.once
