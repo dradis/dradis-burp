@@ -1,8 +1,8 @@
-issue.host
-issue.path
-issue.location
-issue.severity
 issue.confidence
+issue.detail
+issue.host
+issue.location
+issue.path
 issue.request
 issue.request_1
 issue.request_2
@@ -11,4 +11,4 @@ issue.response
 issue.response_1
 issue.response_2
 issue.response_3
-issue.detail
+issue.severity
