@@ -1,6 +1,7 @@
 ## Dradis Framework 3.20 (XXX, 2020) ##
 
 *  Make `issue.location` available at the HTML Evidence level.
+*   Convert highlighted HTML code to Dradis highlight format
 
 ## Dradis Framework 3.19 (September, 2020) ##
 
