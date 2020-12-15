@@ -1,6 +1,8 @@
 ## Dradis Framework 3.20 (XXX, 2020) ##
 
-*  Make `issue.location` available at the HTML Evidence level.
+*   Convert highlighted HTML code to Dradis highlight format
+*   Make `issue.detail` available at the Evidence level for HTML uploads.
+*   Make `issue.location` available at the HTML Evidence level.
 
 ## Dradis Framework 3.19 (September, 2020) ##
 
