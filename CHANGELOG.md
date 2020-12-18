@@ -1,4 +1,4 @@
-## Dradis Framework 3.20 (XXX, 2020) ##
+## Dradis Framework 3.20 (December, 2020) ##
 
 *   Convert highlighted HTML code to Dradis highlight format
 *   Make `issue.detail` available at the Evidence level for HTML uploads.
