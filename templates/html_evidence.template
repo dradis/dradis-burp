@@ -1,50 +1,35 @@
-#[Host]#
-%issue.host%
-
-
-#[Path]#
-%issue.path%
-
-
 #[Location]#
 %issue.location%
 
+#[Output]#
+p. *Request 1*
 
-#[Severity]#
-%issue.severity%
-
-
-#[Confidence]#
-%issue.confidence%
-
-
-#[Request]#
 bc.. %issue.request%
 
+p. *Response 1*
 
-#[Response]#
 bc.. %issue.response%
 
+p. *Request 2*
 
-#[Request 1]#
 bc.. %issue.request_1%
 
+p. *Response 2*
 
-#[Response 1]#
 bc.. %issue.response_1%
 
+p. *Request 3*
 
-#[Request 2]#
 bc.. %issue.request_2%
 
+p. *Response 3*
 
-#[Response 2]#
 bc.. %issue.response_2%
 
+p. *Request 4*
 
-#[Request 3]#
 bc.. %issue.request_3%
 
+p. *Response 4*
 
-#[Response 3]#
 bc.. %issue.response_3%

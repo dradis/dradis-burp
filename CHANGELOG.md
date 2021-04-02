@@ -1,6 +1,6 @@
 ## Dradis Framework 3.22 (April, 2021) ##
 
-*   No changes.
+*   Update default configuration to match welcome kit
 
 ## Dradis Framework 3.21 (February, 2021) ##
 
