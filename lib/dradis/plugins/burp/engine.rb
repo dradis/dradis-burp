@@ -17,12 +17,5 @@ module Dradis::Plugins::Burp
         Dradis::Plugins::Burp::Xml
       ]
     end
-
-    def self.template_names
-      {
-        Dradis::Plugins::Burp::Html => { evidence: 'html_evidence', issue: 'issue' },
-        Dradis::Plugins::Burp::Xml => { evidence: 'evidence', issue: 'issue' }
-      }
-    end
   end
 end

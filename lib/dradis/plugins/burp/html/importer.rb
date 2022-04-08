@@ -11,6 +11,10 @@ module Dradis::Plugins::Burp
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      def self.templates
+        { evidence: 'html_evidence', issue: 'issue' }
+      end
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Burp
         super(args)

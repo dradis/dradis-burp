@@ -15,6 +15,10 @@ module Dradis::Plugins::Burp
       BURP_EXTENSION_TYPE = '134217728'.freeze
       BURP_SEVERITIES     = ['Information', 'Low', 'Medium', 'High'].freeze
 
+      def self.templates
+        { evidence: 'evidence', issue: 'issue' }
+      end
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Burp
         super(args)
