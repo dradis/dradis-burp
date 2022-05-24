@@ -1,3 +1,6 @@
+[v#.#.#] ([month] [YYYY])
+  - Registers template mappings locally
+
 v4.3.0 (April 2022)
   - No changes
 
