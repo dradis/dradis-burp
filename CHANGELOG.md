@@ -1,3 +1,6 @@
+v4.5.0 (August 2022)
+  - No changes
+
 v4.4.0 (June 2022)
   - Registers template mappings locally
 
