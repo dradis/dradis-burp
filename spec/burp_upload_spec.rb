@@ -202,6 +202,7 @@ describe 'Burp upload plugin' do
       # # create_issue should be called once for each issue in the xml
       expect(@content_service).to receive(:create_issue) do |args|
         expect(args[:text]).to include("#[Title]#\nStrict transport security not enforced")
+        expect(args[:text]).to include("*application*", "@Wi-Fi@")
         expect(args[:id]).to eq(16777984)
         OpenStruct.new(args)
       end.once
@@ -209,6 +210,7 @@ describe 'Burp upload plugin' do
         expect(args[:content]).to include("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
         expect(args[:content]).to include("#[Location]#\nhttp://1.1.1.1/dradis/sessions")
         expect(args[:issue].text).to include("#[Title]#\nStrict transport security not enforced")
+        expect(args[:issue].text).to include("*application*", "@Wi-Fi@")
         expect(args[:node].label).to eq("github.com/dradis/dradis-burp")
       end.once
 
