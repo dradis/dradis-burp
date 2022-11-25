@@ -37,7 +37,7 @@ module Burp
       result.gsub!(/<tr>(.*?)<\/tr>/m){|m| "|#{ $1 }\n" }
       result.gsub!(/<td>(.*?)<\/td>/, '\1|')
       result.gsub!(/<strong>(.*?)<\/strong>/, '*\1*')
-      result.gsub!(/<code>(.*?)<\/code>/, 'bc. \1')
+      result.gsub!(/<code>(.*?)<\/code>/, '@\1@')
 
       result
     end
