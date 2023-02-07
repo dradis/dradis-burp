@@ -1,3 +1,6 @@
+v4.7.0 (XXX 2023)
+  - Add support for large base64 response
+
 v4.6.0 (November 2022)
   - No changes
 
