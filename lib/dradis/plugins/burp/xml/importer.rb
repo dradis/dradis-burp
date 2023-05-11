@@ -37,7 +37,7 @@ module Dradis::Plugins::Burp
         end
 
         logger.info { 'Parsing Burp Scanner XML output file...' }
-        doc = Nokogiri::XML(file_content)
+        doc = Nokogiri::XML(file_content) { |config| config.huge }
         logger.info { 'Done.' }
 
         if doc.root.name != 'issues'

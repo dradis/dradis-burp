@@ -1,6 +1,11 @@
-[v#.#.#] ([month] [YYYY])
-  - [future tense verb] [feature]
+v4.9.0 ([month] [YYYY])
   - Adds strong and code tags parsing
+
+v4.8.0 (April 2023)
+  - No changes
+
+v4.7.0 (February 2023)
+  - Add support for large base64 response
 
 v4.6.0 (November 2022)
   - No changes
