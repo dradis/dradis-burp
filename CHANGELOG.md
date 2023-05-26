@@ -1,4 +1,4 @@
-v4.9.0 (May 2023)
+v4.9.0 (June 2023)
   - Adds strong and code tags parsing
 
 v4.8.0 (April 2023)
