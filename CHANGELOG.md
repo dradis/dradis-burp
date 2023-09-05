@@ -1,5 +1,5 @@
 v4.10.0 (September 2023)
-  - No changes
+  - Update gemspec links
 
 v4.9.0 (June 2023)
   - Adds strong and code tags parsing
