@@ -11,12 +11,12 @@ The add-on requires [Dradis CE](https://dradisframework.org/) > 3.0, or [Dradis 
 
 ## More information
 
-See the Dradis Framework's [README.md](https://github.com/dradis/dradisframework/blob/master/README.md)
+See the Dradis Framework's [README.md](https://github.com/dradis/dradis-ce/blob/develop/README.md)
 
 
 ## Contributing
 
-See the Dradis Framework's [CONTRIBUTING.md](https://github.com/dradis/dradisframework/blob/master/CONTRIBUTING.md)
+See the Dradis Framework's [CONTRIBUTING.md](https://github.com/dradis/dradis-ce/blob/develop/CONTRIBUTING.md)
 
 
 ## License
