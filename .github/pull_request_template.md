@@ -1,9 +1,16 @@
+Please review [CONTRIBUTING.md](https://github.com/dradis/dradis-ce/blob/develop/CONTRIBUTING.md) and remove this line.
+
 ### Summary
 
 Provide a general description of the code changes in your pull
 request... were there any bugs you had fixed? If so, mention them. If
 these bugs have open GitHub issues, be sure to tag them here as well,
 to keep the conversation linked together.
+
+
+### Testing Steps
+
+Provide steps to test functionality, described in detail for someone not familiar with this part of the application / code base
 
 
 ### Other Information
@@ -26,11 +33,13 @@ products, we must have the copyright associated with the entire
 codebase. Any code you create which is merged must be owned by us.
 That's not us trying to be a jerks, that's just the way it works.
 
-Please review the [CONTRIBUTING.md](https://github.com/dradis/dradis-ce/blob/master/CONTRIBUTING.md)
-file for the details.
-
 You can delete this section, but the following sentence needs to
 remain in the PR's description:
 
 > I assign all rights, including copyright, to any future Dradis
 > work by myself to Security Roots.
+
+### Check List
+
+- [ ] Added a CHANGELOG entry
+- [ ] Added specs
