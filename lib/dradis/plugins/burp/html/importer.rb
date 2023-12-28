@@ -90,7 +90,7 @@ module Dradis::Plugins::Burp
         evidence_id = html_evidence.attr('id').value
         logger.info { "Processing evidence #{evidence_id}" }
 
-        host_td    = html_evidence.search("td:starts-with('Host:')").first
+        host_td    = html_evidence.xpath("//td[starts-with(.,'Host:')]").first
         host_label = host_td.next_element.text.split('//').last
         host       = content_service.create_node(label: host_label, type: :host)
 
