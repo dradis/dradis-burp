@@ -1,3 +1,6 @@
+v4.11.0 (January 2024)
+  - Changes nokogiri search to xpath to improve compatibility with versions >= 1.15
+
 v4.10.0 (September 2023)
   - Update gemspec links
 

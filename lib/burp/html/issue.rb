@@ -153,7 +153,7 @@ module Burp
         table = h2.next_element
 
         summary_table_tags.each do |tag|
-          td = table.search("td:starts-with('#{tag.to_s.capitalize}:')").first
+          td = table.xpath("//td[starts-with(.,'#{tag.to_s.capitalize}:')]").first
           @summary[tag] = td.next_element.text
         end
 
