@@ -56,8 +56,8 @@ module Dradis::Plugins::Burp
           end
         issue_id   = html_issue.attr('id').value
         issue_text =
-          template_service.process_template(
-            template: 'issue',
+          mapping_service.apply_mapping(
+            source: 'issue',
             data: html_issue
           )
 
@@ -95,8 +95,8 @@ module Dradis::Plugins::Burp
         host       = content_service.create_node(label: host_label, type: :host)
 
         evidence_text =
-          template_service.process_template(
-            template: 'html_evidence',
+          mapping_service.apply_mapping(
+            source: 'html_evidence',
             data: html_evidence
           )
 

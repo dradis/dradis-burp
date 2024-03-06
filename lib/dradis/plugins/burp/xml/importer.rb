@@ -75,8 +75,8 @@ module Dradis::Plugins::Burp
         xml_issue.at('severity').content = BURP_SEVERITIES[@severities[id]]
 
         issue_text =
-          template_service.process_template(
-            template: 'issue',
+          mapping_service.apply_mapping(
+            source: 'issue',
             data: xml_issue
           )
 
@@ -94,8 +94,8 @@ module Dradis::Plugins::Burp
         end
 
         evidence_text =
-          template_service.process_template(
-            template: 'evidence',
+          mapping_service.apply_mapping(
+            source: 'evidence',
             data: xml_evidence
           )
 
