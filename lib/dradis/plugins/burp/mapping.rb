@@ -1,5 +1,6 @@
 module Dradis::Plugins::Burp
   module Mapping
+
     DEFAULT_MAPPING = {
       html_evidence: {
         'Host' => '{{ burp[issue.host] }}',
