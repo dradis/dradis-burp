@@ -16,7 +16,7 @@ module Dradis::Plugins::Burp
       BURP_SEVERITIES     = ['Information', 'Low', 'Medium', 'High'].freeze
 
       def self.templates
-        { evidence: 'evidence', issue: 'issue' }
+        { evidence: 'xml_evidence', issue: 'xml_issue' }
       end
 
       def initialize(args={})
@@ -76,7 +76,7 @@ module Dradis::Plugins::Burp
 
         issue_text =
           template_service.process_template(
-            template: 'issue',
+            template: 'xml_issue',
             data: xml_issue
           )
 
@@ -95,7 +95,7 @@ module Dradis::Plugins::Burp
 
         evidence_text =
           template_service.process_template(
-            template: 'evidence',
+            template: 'xml_evidence',
             data: xml_evidence
           )
 
