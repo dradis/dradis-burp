@@ -12,7 +12,7 @@ module Dradis::Plugins::Burp
 
     class Importer < Dradis::Plugins::Upload::Importer
       def self.templates
-        { evidence: 'html_evidence', issue: 'issue' }
+        { evidence: 'html_evidence', issue: 'html_issue' }
       end
 
       def initialize(args={})
@@ -57,7 +57,7 @@ module Dradis::Plugins::Burp
         issue_id   = html_issue.attr('id').value
         issue_text =
           mapping_service.apply_mapping(
-            source: 'issue',
+            source: 'html_issue',
             data: html_issue
           )
 

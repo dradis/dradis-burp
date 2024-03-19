@@ -1,5 +1,7 @@
 v4.12.0 (XXXX 2024)
+  - Migrate integration to use Mappings Manager
   - Update Dradis links in README
+  - Update template names to include uploader
 
 v4.11.0 (January 2024)
   - Fix compatibility with nokogiri >= 1.15
