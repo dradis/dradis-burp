@@ -53,5 +53,54 @@ module Dradis::Plugins::Burp
         'Classifications' => '{{ burp[issue.vulnerability_classifications] }}'
       }
     }.freeze
+
+    SOURCE_FIELDS = {
+      html_evidence: [
+        'issue.confidence',
+        'issue.detail',
+        'issue.host',
+        'issue.location',
+        'issue.path',
+        'issue.request',
+        'issue.request_1',
+        'issue.request_2',
+        'issue.request_3',
+        'issue.response',
+        'issue.response_1',
+        'issue.response_2',
+        'issue.response_3',
+        'issue.severity'
+      ],
+      html_issue: [
+        'issue.background',
+        'issue.detail',
+        'issue.name',
+        'issue.references',
+        'issue.remediation_background',
+        'issue.remediation_detail',
+        'issue.severity',
+        'issue.vulnerability_classifications'
+      ],
+      xml_evidence: [
+        'issue.host',
+        'issue.path',
+        'issue.location',
+        'issue.severity',
+        'issue.confidence',
+        'issue.request',
+        'issue.response',
+        'issue.detail'
+      ],
+      xml_issue: [
+        'issue.background',
+        'issue.detail',
+        'issue.name',
+        'issue.references',
+        'issue.remediation_background',
+        'issue.remediation_detail',
+        'issue.severity',
+        'issue.vulnerability_classifications'
+      ]
+    }.freeze
   end
 end
