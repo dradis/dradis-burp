@@ -54,6 +54,7 @@ describe 'Burp upload plugin' do
         expect(args[:id]).to eq(16777984)
         OpenStruct.new(args)
       end.once
+      
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include('Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')
         expect(args[:content]).to include("http://1.1.1.1/dradis/sessions")
