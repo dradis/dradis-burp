@@ -1,3 +1,6 @@
+v4.X.X (Month 2024)
+  - Fix HTML importer associating issues in the wrong node
+
 v4.13.0 (July 2024)
   - No changes
 
