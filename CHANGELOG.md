@@ -1,5 +1,6 @@
 v4.16.0 (May 2025)
   - Fix HTML importer associating issues in the wrong node
+  - Accept state option in command line upload
 
 v4.15.0 (December 2024)
   - No changes
