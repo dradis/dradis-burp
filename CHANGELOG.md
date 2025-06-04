@@ -1,3 +1,6 @@
+v4.17.0 (Month 2025)
+  - Add support for multiple Request/Response fields in XML
+
 v4.16.0 (May 2025)
   - Fix HTML importer associating issues in the wrong node
 

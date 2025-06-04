@@ -89,7 +89,15 @@ module Dradis::Plugins::Burp
         'issue.confidence',
         'issue.request',
         'issue.response',
-        'issue.detail'
+        'issue.detail',
+        'issue.request',
+        'issue.request_1',
+        'issue.request_2',
+        'issue.request_3',
+        'issue.response',
+        'issue.response_1',
+        'issue.response_2',
+        'issue.response_3',
       ],
       xml_issue: [
         'issue.background',
@@ -99,7 +107,7 @@ module Dradis::Plugins::Burp
         'issue.remediation_background',
         'issue.remediation_detail',
         'issue.severity',
-        'issue.vulnerability_classifications'
+        'issue.vulnerability_classifications',
       ]
     }.freeze
   end
