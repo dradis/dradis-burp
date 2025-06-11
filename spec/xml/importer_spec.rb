@@ -140,6 +140,8 @@ describe 'Burp upload plugin' do
       end.once
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("Low")
+        expect(args[:content]).to include("test multiple request")
+        expect(args[:content]).to include("test multiple response")
         expect(args[:issue].text).to include("Issue 5")
         expect(args[:node].label).to eq('10.0.0.1')
       end.once
