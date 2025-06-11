@@ -63,9 +63,6 @@ module Burp
 
         method_name = translations_table.fetch(method, method.to_s)
 
-        # no attributes in the <issue> node
-        # return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
-
         # Then we try simple children tags: name, type, ...
         tag = @xml.xpath("./#{method_name}").first
         if tag && !tag.text.blank?
@@ -92,12 +89,16 @@ module Burp
       end
 
       def requestresponse_child(field)
+        # `field` is of the format: [request/response]_[index]
+        # Ex: `response_1` or `request_2`
         field_name, index = field.split('_')
         index = index.to_i
 
-        return 'n/a' unless @xml.xpath('requestresponse')[index]
+        request_response_xml = @xml.at_xpath("requestresponse[#{index + 1}]")
 
-        xml_node = @xml.xpath('requestresponse')[index].at(field_name)
+        return 'n/a' unless request_response_xml
+
+        xml_node = request_response_xml.at(field_name)
         result = "[unprocessable #{field}]"
 
         if xml_node['base64'] == 'true'
