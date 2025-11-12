@@ -1,3 +1,6 @@
+v4.19.0 (November 2025)
+  - No changes
+
 v4.18.0 (September 2025)
   - No changes
 
