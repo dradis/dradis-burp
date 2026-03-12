@@ -1,3 +1,6 @@
+v5.0.0 (March 2026)
+  - No changes
+
 v4.19.0 (November 2025)
   - No changes
 
