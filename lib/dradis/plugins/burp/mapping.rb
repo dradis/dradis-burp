@@ -75,6 +75,7 @@ module Dradis::Plugins::Burp
         'issue.background',
         'issue.detail',
         'issue.name',
+        'issue.type',
         'issue.references',
         'issue.remediation_background',
         'issue.remediation_detail',
@@ -92,6 +93,7 @@ module Dradis::Plugins::Burp
         'issue.detail'
       ],
       xml_issue: [
+        'issue.type',
         'issue.background',
         'issue.detail',
         'issue.name',
