@@ -1,3 +1,6 @@
+v5.4.0 (September 2026)
+  - No changes
+
 v5.3.0 (August 2026)
   - Add Type as an available Issue field
 
